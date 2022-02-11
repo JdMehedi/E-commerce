@@ -18,7 +18,6 @@ Route::get('/', function () {
 //Roles
 Route::group(['prefix' => ''], function () {
     Route::resource('roles', 'RolesController');
-     Route::get('roles/destroy/{id}','RolesController@destroy')->name('roles.destroy');
 });
 
 
