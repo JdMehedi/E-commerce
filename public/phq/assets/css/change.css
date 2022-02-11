@@ -1,0 +1,17 @@
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 10px 5px;
+    line-height: 1.42857;
+    vertical-align: top;
+    border-top: 1px solid #e7ecf1;
+}
+
+
+tbody tr td {
+    /* text-align: center; */
+    line-height: 12px !important;
+}
+
+.table-bordered, .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+    border: 1px solid #000 !important;
+    text-align: center;
+}
