@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use App\User;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateUserContactsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('user_contacts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('fname')->nullable();
             $table->string('lname')->nullable();
@@ -37,28 +36,18 @@ class CreateUsersTable extends Migration
             $table->integer('status')->nullable();
             $table->string('same_as')->nullable();
             $table->string('module_id')->nullable();
+            $table->unsignedBigInteger('user_id');
+
             $table->string('slug')->nullable();
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
-
-
-        DB::table('users')->insert(
-            array(
-                array(
-
-                    'fname' => 'admin',
-                    'email' => 'admin@test.com',
-                    'status' => 1,
-                    'password' => '$2y$10$46Y2SPvnA.GIejLuevj5Q.x/oHV8.nAcv/pMNC6wWZ3Cjjq3iw9A2',
-                    'created_at' => '2020-01-01 00:00:00',
-                    'updated_at' => '2020-01-01 00:00:00'
-                )
-            )
-        );
-        
-
     }
 
     /**
@@ -68,6 +57,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('user_contacts');
     }
 }

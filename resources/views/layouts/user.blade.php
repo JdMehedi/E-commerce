@@ -230,10 +230,41 @@
                             </ul>
                         </li>
 
-                        
-
-
                         <?php
+                        $user=Auth::user();
+                        $members = array('shippers', 'shipper/create');
+                        ?>
+                        @if (!is_null(Auth::user()) &&  (Auth::user()->can('shipper.index') || Auth::user()->can('shipper.create')))
+                        <li class="nav-item {{ in_array(Request::path(), $members) ? 'active' : '' }}">
+                            <a  href="javascript:;" class="nav-link nav-toggle">
+                                <i  class="fa fa-user"></i>
+                                <span  class="title">Shipper</span>
+                                <span  class="arrow {{ in_array(Request::path(), $members) ? 'open' : '' }}"></span>
+                            </a>
+                            <ul  class="sub-menu">
+                                @if($user->can('shipper.index'))
+                                <li  class="nav-item {{ Request::path() == 'shipper/create' ? 'active' : '' }}">
+                                    <a   href="{{ URL::to('shipper/create') }}" class="nav-link ">
+                                        <span  class="title">Add Shipper</span>
+                                    </a>
+                                </li>
+                                @endif
+                                    @if($user->can('shipper.index'))
+
+                                    <li class="nav-item {{ Request::path() == 'shipper' ? 'active' : '' }}">
+                                    <a  href="{{ URL::to('shippers') }}" class="nav-link ">
+                                        <span class="title">Shipper List</span>
+                                    </a>
+                                </li>
+                                    @endif
+                            </ul>
+                        </li>
+                        @endif
+
+
+
+
+                    <?php
                         $members = array('roles', 'roles/create');
                         $user=Auth::user();
                         ?>
