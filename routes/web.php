@@ -97,4 +97,17 @@ Route::post('studentLogin','StudentController@loginStudent');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('download-file-{id}','WelcomeController@downloadFile')->name('downLoadFile');
+//shipper
+Route::get('shipper/create','ShippersController@create')->name('shipper.create');
+Route::post('shipper/store','ShippersController@store')->name('shipper.store');
+Route::get('shippers','ShippersController@index')->name('shipper.index');
+Route::get('shipper/edit/{slug}','ShippersController@edit')->name('shipper.edit');
+Route::post('shipper/update','ShippersController@update')->name('shipper.update');
+Route::get('shipper/delete/{slug}','ShippersController@destroy')->name('shipper.destroy');
+Route::get('shipper/show/{slug}','ShippersController@show')->name('shipper.show');
 
+
+//shipper contact
+Route::get('userContact/create/{slug}','UserContactController@create')->name('user.contact.create');
+Route::post('userContact/store','UserContactController@store')->name('user.contact.store');
+Route::get('user-Contact','UserContactController@index')->name('user.contact.index');

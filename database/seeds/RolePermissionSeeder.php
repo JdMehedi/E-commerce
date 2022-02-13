@@ -53,6 +53,21 @@ class RolePermissionSeeder extends Seeder
                     'user.delete',
                 ]
             ],
+            [
+                'group_name'=> 'Trucker',
+                'permissions'=>[
+                    'shipper.index',
+                    'shipper.create',
+                    'shipper.store',
+                    'shipper.update',
+                    'shipper.edit',
+                    'shipper.destroy',
+                    'shipper.show',
+                    'user.contact.create',
+                    'user.contact.index',
+                    'user.contact.store',
+                ]
+            ],
 
         ];
                 //Create and Assign Permissions
