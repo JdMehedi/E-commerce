@@ -20,7 +20,7 @@ class ShippersController extends Controller
     }
 
 
-    public function create(Shipper $shipper)
+    public function create(User $shipper)
     {
         return view ('admin.shipper.create')->with('data',$shipper);
     }
