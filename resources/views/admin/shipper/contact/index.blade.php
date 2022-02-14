@@ -58,8 +58,8 @@
                                 <td>{{$list->mobile}}</td>
                                 <td>{{$list->address}}</td>
                                 <td>
-                                    <a href="" class="btn btn-xs blue"> <i class="fa fa-edit"></i>Edit</a>
-                                    <a href="" class="btn btn-xs red" onclick="return confirm('Do You want to confirm the shipper delete?')"><i class="fa fa-trash" title="delete"></i>Delete</a>
+                                    <a href="{{route('user.contact.edit',$list->slug)}}" class="btn btn-xs blue"> <i class="fa fa-edit"></i>Edit</a>
+                                    <a href="{{route('user.contact.destroy',$list->slug)}}" class="btn btn-xs red" onclick="return confirm('Do You want to confirm the shipper delete?')"><i class="fa fa-trash" title="delete"></i>Delete</a>
                                 </td>
                             </tr>
                         @endforeach

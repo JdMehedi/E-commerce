@@ -18,7 +18,7 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <a href="#">Add Shipper</a>
+                <a href="#"> {{isset($shipper) ? 'Edit shipper' : 'Add shipper'}}</a>
                 <i class="fa fa-circle"></i>
             </li>
         </ul>
@@ -28,7 +28,7 @@
 
     <div class="content">
         <div class="col-md-6">
-            <h3 class="page-title"> Add Shipper Form </h3>
+            <h3 class="page-title">  {{isset($shipper) ? 'Edit shipper' : 'Add shipper'}}</h3>
         </div>
 
         <div class="row">

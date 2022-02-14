@@ -37,7 +37,6 @@ class CreateUserContactsTable extends Migration
             $table->string('same_as')->nullable();
             $table->string('module_id')->nullable();
             $table->unsignedBigInteger('user_id');
-
             $table->string('slug')->nullable();
             $table->softDeletes();
             $table->rememberToken();

@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Shipper;
-use App\ShipperContact;
 use App\User;
 use App\UserContact;
 use Illuminate\Http\Request;
@@ -15,7 +13,6 @@ class ShippersController extends Controller
     {
 
         $data['lists']=User::whereNotNull('slug')->get();
-//        dd($data);
         return view ('admin.shipper.index',$data);
     }
 

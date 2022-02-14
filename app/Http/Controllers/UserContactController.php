@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\UserContact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class UserContactController extends Controller
 {
@@ -15,7 +16,7 @@ class UserContactController extends Controller
      */
     public function index()
     {
-        $data['lists']=UserContact::latest('id')->paginate(3);
+        $data['lists']=UserContact::all();
         return view ('admin.shipper.contact.index',$data);
     }
 
@@ -27,7 +28,6 @@ class UserContactController extends Controller
     public function create(UserContact $userContact,$slug)
     {
         $data['lists']=User::where('slug',$slug)->first();
-//dd($data->id);
         return view ('admin.shipper.contact.create',$data)->with('data',$userContact);
     }
 
@@ -56,6 +56,8 @@ class UserContactController extends Controller
                 'address'=>$request->get('address'),
                 'user_id'=>$request->get('user_id'),
                 'fax'=>$request->get('fax'),
+                $str1 = $this->RemoveSpecialChar('email'),
+                'slug'  => Str::slug($request->$str1),
             ]
         );
         if(empty($SContact)){
@@ -84,9 +86,11 @@ class UserContactController extends Controller
      * @param  \App\UserContact  $userContact
      * @return \Illuminate\Http\Response
      */
-    public function edit(UserContact $userContact)
+    public function edit(UserContact $userContact,$slug)
     {
-        //
+        $data['lists']=UserContact::where('slug',$slug)->first();
+        return view ('admin.shipper.contact.edit',$data);
+
     }
 
     /**
@@ -96,9 +100,18 @@ class UserContactController extends Controller
      * @param  \App\UserContact  $userContact
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserContact $userContact)
+    public function update(Request $request)
     {
-        //
+        $data = UserContact::where("id",$request->id)->first();
+        $data->update([
+            $data->contact=$request->contact,
+            $data->email=$request->email,
+            $data->phone=$request->phone,
+            $data->mobile=$request->mobile,
+            $data->address=$request->address,
+            $data->fax=$request->fax,
+        ]);
+        return redirect()->route('shipper.index')->with('success_message','Successfully shipper updated');
     }
 
     /**
@@ -107,8 +120,18 @@ class UserContactController extends Controller
      * @param  \App\UserContact  $userContact
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserContact $userContact)
+    public function destroy($slug)
     {
-        //
+        $data= UserContact::where("slug",$slug)->first();
+        $data->delete();
+        return redirect()->back();
+    }
+
+    function RemoveSpecialChar($str) {
+        $res = str_replace( array( '\'', '"','.','@',
+            ',' , ';', '<', '>' ), ' ', $str);
+
+        // Returning the result
+        return $res;
     }
 }
