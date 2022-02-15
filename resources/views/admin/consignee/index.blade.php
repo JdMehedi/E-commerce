@@ -3,6 +3,8 @@
     <link href="{{asset('phq/assets/global/plugins/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('phq/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css')}}" rel="stylesheet" type="text/css" />
 @stop
+
+
 @section('content')
 
     <div class="page-bar">
@@ -12,7 +14,7 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <a href="#">Contact List</a>
+                <a href="#">Consignee List</a>
             </li>
         </ul>
     </div>
@@ -20,8 +22,13 @@
     <!-- BEGIN PAGE TITLE-->
     <div class="content">
         <div class="col-md-6">
-            <h3 class="page-title"> Contact List </h3>
+            <h3 class="page-title"> Consignee List </h3>
         </div>
+
+            <div class="btn-group right" style="float:right;padding-top:25px">
+                <a href="{{route('consignee.create')}}" class="btn btn-sm red"><i class="fa fa-plus"></i>  Add Consignee</a>
+            </div>
+
     </div>
     <!-- END PAGE TITLE-->
     <!-- END PAGE HEADER-->
@@ -30,39 +37,32 @@
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet light bordered">
                 <div class="portlet-title">
-                    <h3> <b> {{$value->fname}}</b></h3>
-                    <div class="tools ">
-                        <div class="btn btn-sm">
-                            <a href="{{route('user.contact.create',$slug)}}" class="btn btn-sm red"><i class="fa fa-plus"></i>  Add Contact</a>
-                        </div>
-
-                    </div>
+                    <div class="tools"> </div>
                 </div>
                 <div class="portlet-body">
                     <table class="table table-striped table-bordered table-hover" id="sample_1"><!-- table2 -->
                         <thead>
                         <tr>
-                            <th>Contact</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Mobile</th>
-                            <th>Address</th>
+                            <th>ID</th>
+                            <th>Consignee</th>
+                            <th>Nick Name</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
+
+                        <?php $index = 1?>
                         @foreach($lists as $list)
                             <tr>
-                                <td>{{$list->contact}}</td>
-                                <td>{{$list->email}}</td>
-                                <td>{{$list->phone}}</td>
-                                <td>{{$list->mobile}}</td>
-                                <td>{{$list->address}}</td>
-                                <td>
-                                    <a href="{{route('user.contact.edit',$list->slug)}}" class="btn btn-xs blue"> <i class="fa fa-edit"></i>Edit</a>
-                                    <a href="{{route('user.contact.destroy',$list->slug)}}" class="btn btn-xs red" onclick="return confirm('Do You want to confirm the shipper delete?')"><i class="fa fa-trash" title="delete"></i>Delete</a>
-                                </td>
-                            </tr>
+                            <td>{{$index ++}}</td>
+                            <td>{{$list->fname}}</td>
+                            <td>{{$list->nick_name}}</td>
+                            <td>
+                                <a href="{{route('consignee.edit',$list->slug)}}" class="btn btn-xs blue"> <i class="fa fa-edit"></i>Edit</a>
+                                <a href="{{route('consignee.destroy',$list->slug)}}" class="btn btn-xs red" onclick="return confirm('Do You want to confirm the shipper delete?')"><i class="fa fa-trash" title="delete"></i>Delete</a>
+                                <a href="{{route('consignee.show',$list->slug)}}" class="btn btn-xs yellow"> <i class="fa fa-edit"></i>Show</a>
+                            </td>
+                        </tr>
                         @endforeach
                         </tbody>
                     </table>
@@ -74,6 +74,8 @@
     <!-- END CONTENT BODY -->
     <!-- END CONTENT -->
 @stop
+
+
 @section('custom_js')
     <script src="{{asset('phq/assets/global/scripts/datatable.js')}}" type="text/javascript"></script>
     <script src="{{asset('phq/assets/global/plugins/datatables/datatables.min.js')}}" type="text/javascript"></script>

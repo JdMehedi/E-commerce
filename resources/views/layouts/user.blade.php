@@ -232,33 +232,35 @@
 
                         <?php
                         $user=Auth::user();
-                        $members = array('shippers', 'shipper/create');
+                        $members = array('shippers', 'consignees');
                         ?>
-                        @if (!is_null(Auth::user()) &&  (Auth::user()->can('shipper.index') || Auth::user()->can('shipper.create')))
+                        @if (!is_null(Auth::user()) &&  (Auth::user()->can('shipper.index') || Auth::user()->can('consignee.index')))
                         <li class="nav-item {{ in_array(Request::path(), $members) ? 'active' : '' }}">
                             <a  href="javascript:;" class="nav-link nav-toggle">
                                 <i  class="fa fa-user"></i>
-                                <span  class="title">Shipper</span>
+                                <span  class="title">Trucker</span>
                                 <span  class="arrow {{ in_array(Request::path(), $members) ? 'open' : '' }}"></span>
                             </a>
                             <ul  class="sub-menu">
                                 @if($user->can('shipper.index'))
+                                    <li class="nav-item {{ Request::path() == 'shipper' ? 'active' : '' }}">
+                                        <a  href="{{ URL::to('shippers') }}" class="nav-link ">
+                                            <span class="title">Shipper List</span>
+                                        </a>
+                                    </li>
 
                                 @endif
-                                    @if($user->can('shipper.index'))
+                                    @if($user->can('consignee.index'))
 
-                                    <li class="nav-item {{ Request::path() == 'shipper' ? 'active' : '' }}">
-                                    <a  href="{{ URL::to('shippers') }}" class="nav-link ">
-                                        <span class="title">Shipper List</span>
+                                    <li class="nav-item {{ Request::path() == 'consignees' ? 'active' : '' }}">
+                                    <a  href="{{ URL::to('consignees') }}" class="nav-link ">
+                                        <span class="title">Consignee List</span>
                                     </a>
                                 </li>
                                     @endif
                             </ul>
                         </li>
                         @endif
-
-
-
 
                     <?php
                         $members = array('roles', 'roles/create');

@@ -30,10 +30,10 @@
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet light bordered">
                 <div class="portlet-title">
-                    <h3> <b> {{$value->fname}}</b></h3>
+                  <h3> <b> {{$value->fname}}</b></h3>
                     <div class="tools ">
                         <div class="btn btn-sm">
-                            <a href="{{route('user.contact.create',$slug)}}" class="btn btn-sm red"><i class="fa fa-plus"></i>  Add Contact</a>
+                            <a href="{{route('consignee.contact.create',$slug)}}" class="btn btn-sm red"><i class="fa fa-plus"></i>  Add Consignee Contact</a>
                         </div>
 
                     </div>
@@ -51,6 +51,7 @@
                         </tr>
                         </thead>
                         <tbody>
+
                         @foreach($lists as $list)
                             <tr>
                                 <td>{{$list->contact}}</td>
@@ -59,8 +60,8 @@
                                 <td>{{$list->mobile}}</td>
                                 <td>{{$list->address}}</td>
                                 <td>
-                                    <a href="{{route('user.contact.edit',$list->slug)}}" class="btn btn-xs blue"> <i class="fa fa-edit"></i>Edit</a>
-                                    <a href="{{route('user.contact.destroy',$list->slug)}}" class="btn btn-xs red" onclick="return confirm('Do You want to confirm the shipper delete?')"><i class="fa fa-trash" title="delete"></i>Delete</a>
+                                    <a href="{{route('consignee.contact.edit',$list->slug)}}" class="btn btn-xs blue"> <i class="fa fa-edit"></i>Edit</a>
+                                    <a href="{{route('consignee.contact.destroy',$list->slug)}}" class="btn btn-xs red" onclick="return confirm('Do You want to confirm the consignee delete?')"><i class="fa fa-trash" title="delete"></i>Delete</a>
                                 </td>
                             </tr>
                         @endforeach
