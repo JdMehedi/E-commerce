@@ -111,3 +111,8 @@ Route::get('shipper/show/{slug}','ShippersController@show')->name('shipper.show'
 Route::get('userContact/create/{slug}','UserContactController@create')->name('user.contact.create');
 Route::post('userContact/store','UserContactController@store')->name('user.contact.store');
 Route::get('user-Contact','UserContactController@index')->name('user.contact.index');
+Route::get('userContact/edit/{slug}','UserContactController@edit')->name('user.contact.edit');
+Route::post('userContact/update','UserContactController@update')->name('user.contact.update');
+Route::get('userContact/delete/{slug}','UserContactController@destroy')->name('user.contact.destroy');
+
+

@@ -243,11 +243,7 @@
                             </a>
                             <ul  class="sub-menu">
                                 @if($user->can('shipper.index'))
-                                <li  class="nav-item {{ Request::path() == 'shipper/create' ? 'active' : '' }}">
-                                    <a   href="{{ URL::to('shipper/create') }}" class="nav-link ">
-                                        <span  class="title">Add Shipper</span>
-                                    </a>
-                                </li>
+
                                 @endif
                                     @if($user->can('shipper.index'))
 

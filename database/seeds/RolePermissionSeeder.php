@@ -66,6 +66,8 @@ class RolePermissionSeeder extends Seeder
                     'user.contact.create',
                     'user.contact.index',
                     'user.contact.store',
+                    'user.contact.edit',
+                    'user.contact.destroy',
                 ]
             ],
 
