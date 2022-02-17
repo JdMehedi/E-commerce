@@ -14,11 +14,11 @@
     <div class="page-bar">
         <ul class="page-breadcrumb">
             <li>
-                <a href="#">Shipper</a>
+                <a href="#">Consignee</a>
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <a href="#"> {{isset($shipper) ? 'Edit shipper' : 'Add shipper'}}</a>
+                <a href="#"> {{isset($user) ? 'Edit Consignee' : 'Add Consignee'}}</a>
                 <i class="fa fa-circle"></i>
             </li>
         </ul>
@@ -28,31 +28,31 @@
 
     <div class="content">
         <div class="col-md-6">
-            <h3 class="page-title">  {{isset($shipper) ? 'Edit shipper' : 'Add shipper'}}</h3>
+            <h3 class="page-title">  {{isset($user) ? 'Edit Consignee' : 'Add Consignee'}}</h3>
         </div>
 
         <div class="row">
             <div class="col-md-12">
                 <div class="portlet-body form">
-                    @if(empty($shipper->id))
-                        {!! Form::open(array('url' => url('shipper/store'),'method' => 'post', 'files' => true, 'class'=>'form-horizontal') )  !!}
+                    @if(empty($user->id))
+                        {!! Form::open(array('url' => url('consignee/store'),'method' => 'post', 'files' => true, 'class'=>'form-horizontal') )  !!}
 {{--                    <input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
                     @else
-                        {!! Form::open(array('url' => url('shipper/update'),'method' => 'post', 'files' => true, 'class'=>'form-horizontal') )  !!}
-                        <input type="hidden" name="id" value="@if(!empty($shipper->id)) {{$shipper->id}} @endif">
+                        {!! Form::open(array('url' => url('consignee/update'),'method' => 'post', 'files' => true, 'class'=>'form-horizontal') )  !!}
+                        <input type="hidden" name="id" value="@if(!empty($user->id)) {{$user->id}} @endif">
                     @endif
                     <div class="form-body">
                         <div class="form-group">
-                            <label class="col-md-5 control-label"> Shipper <span class="red">*</span> : </label>
+                            <label class="col-md-5 control-label"> Consignee <span class="red">*</span> : </label>
                             <div class="col-md-7">
-                                <input type="text"  name="shipper"  value="@if(!empty($shipper->fname)) {{$shipper->fname}} @endif"   placeholder="Enter Shipper" class="form-control input-inline input-medium" >
+                                <input type="text"  name="shipper"  value="@if(!empty($user->fname)) {{$user->fname}} @endif"   placeholder="Enter Consignee" class="form-control input-inline input-medium" >
                                 <div class="red">{{ $errors->first('fname') }}</div>
                             </div>
                         </div>
                             <div class="form-group">
-                            <label class="col-md-5 control-label">Nick Name <span class="red">*</span> : </label>
+                            <label class="col-md-5 control-label">Consignee Name <span class="red">*</span> : </label>
                             <div class="col-md-7">
-                                <input type="text"  name="nickName"  value="@if(!empty($shipper->nick_name)) {{$shipper->nick_name}} @endif"   placeholder="Enter Nick Name" class="form-control input-inline input-medium" >
+                                <input type="text"  name="nickName"  value="@if(!empty($user->nick_name)) {{$user->nick_name}} @endif"   placeholder="Enter Nick Name" class="form-control input-inline input-medium" >
                                 <div class="red">{{ $errors->first('nick_name') }}</div>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                                 <div class="row">
                                     <div class="col-md-offset-5 col-md-6">
                                         <button type="submit" class="btn green">
-                                            {{isset($shipper) ? 'Edit shipper' : 'Add shipper'}}
+                                            {{isset($user) ? 'Edit consignee' : 'Add consignee'}}
                                            </button>
                                         <button type="reset" class="btn default reset">Cancel</button>
                                     </div>

@@ -7,7 +7,7 @@ use App\UserContact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class UserContactController extends Controller
+class ConsigneeContactController extends Controller
 {
     /**
      * Show the form for creating a new resource.
@@ -17,7 +17,7 @@ class UserContactController extends Controller
     public function create(UserContact $userContact,$slug)
     {
         $data['lists']=User::where('slug',$slug)->first();
-        return view ('admin.shipper.contact.create',$data)->with('data',$userContact);
+        return view ('admin.consignee.contact.create',$data)->with('data',$userContact);
     }
 
     /**
@@ -37,7 +37,7 @@ class UserContactController extends Controller
             'fax' => 'required|unique:user_contacts',
         ]);
 
-        $SContact = UserContact::create([
+        $CContact = UserContact::create([
                 'contact'=>$request->get('contact'),
                 'email'=>$request->get('email'),
                 'phone'=>$request->get('phone'),
@@ -49,15 +49,14 @@ class UserContactController extends Controller
                 'slug'  => Str::slug($request->$str1),
             ]
         );
-        if(empty($SContact)){
+        if(empty($CContact)){
             return redirect()->back()
                 ->withInput()
                 ->with("errors_message", __('Failed to insert'));
         }
-        return redirect()->route("shipper.index")
+        return redirect()->route('consignee.index')
             ->with("success_message", __("Data inserted successfully"));
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -67,7 +66,7 @@ class UserContactController extends Controller
     public function edit(UserContact $userContact,$slug)
     {
         $data['lists']=UserContact::where('slug',$slug)->first();
-        return view ('admin.shipper.contact.edit',$data);
+        return view ('admin.consignee.contact.edit',$data);
 
     }
 
@@ -89,7 +88,7 @@ class UserContactController extends Controller
             $data->address=$request->address,
             $data->fax=$request->fax,
         ]);
-        return redirect()->route('shipper.index')->with('success_message','Successfully shipper updated');
+        return redirect()->route('consignee.index')->with('success_message','Successfully consignee updated');
     }
 
     /**
