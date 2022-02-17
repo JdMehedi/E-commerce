@@ -110,9 +110,22 @@ Route::get('shipper/show/{slug}','ShippersController@show')->name('shipper.show'
 //shipper contact
 Route::get('userContact/create/{slug}','UserContactController@create')->name('user.contact.create');
 Route::post('userContact/store','UserContactController@store')->name('user.contact.store');
-Route::get('user-Contact','UserContactController@index')->name('user.contact.index');
 Route::get('userContact/edit/{slug}','UserContactController@edit')->name('user.contact.edit');
 Route::post('userContact/update','UserContactController@update')->name('user.contact.update');
 Route::get('userContact/delete/{slug}','UserContactController@destroy')->name('user.contact.destroy');
 
+//consignee
+Route::get('consignee/create','ConsigneeController@create')->name('consignee.create');
+Route::post('consignee/store','ConsigneeController@store')->name('consignee.store');
+Route::get('consignees','ConsigneeController@index')->name('consignee.index');
+Route::get('consignee/edit/{slug}','ConsigneeController@edit')->name('consignee.edit');
+Route::post('consignee/update','ConsigneeController@update')->name('consignee.update');
+Route::get('consignee/delete/{slug}','ConsigneeController@destroy')->name('consignee.destroy');
+Route::get('consignee/show/{slug}','ConsigneeController@show')->name('consignee.show');
 
+//consignee contact
+Route::get('consigneeContact/create/{slug}','ConsigneeContactController@create')->name('consignee.contact.create');
+Route::post('consigneeContact/store','ConsigneeContactController@store')->name('consignee.contact.store');
+Route::get('consigneeContact/edit/{slug}','ConsigneeContactController@edit')->name('consignee.contact.edit');
+Route::post('consigneeContact/update','ConsigneeContactController@update')->name('consignee.contact.update');
+Route::get('consigneeContact/delete/{slug}','ConsigneeContactController@destroy')->name('consignee.contact.destroy');
