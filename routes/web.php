@@ -69,6 +69,10 @@ Route::group(['middleware' => 'customAuth'], function(){
 
 Route::get('notices','NoticeController@listNotice');
 
+// orderLog List
+
+Route::get('orderLog','OrderLogController@orderLog')->name('orderLog');
+
 // profiles
 
 

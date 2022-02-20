@@ -81,6 +81,12 @@ class RolePermissionSeeder extends Seeder
                     'consignee.contact.destroy',
                 ]
             ],
+            [
+                'group_name'=> 'Order',
+                'permissions'=>[
+                    'orderLog',
+                ]
+            ],
 
         ];
                 //Create and Assign Permissions
