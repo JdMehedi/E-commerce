@@ -204,7 +204,16 @@
                             </ul>
                         </li>
                         @endif
-
+                        
+                        @if (!is_null(Auth::user()) &&  (Auth::user()->can('orderLog')))
+                        <li  class="nav-item {{ Request::path() == 'orderLog' ? 'active' : '' }}">
+                            <a href="{{ URL::to('orderLog') }}" class="nav-link">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span class="title">OrderLog</span>
+                                <span  class="selected"></span>
+                            </a>
+                        </li>
+                        @endif
                         <?php
 
 
