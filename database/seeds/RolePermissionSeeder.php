@@ -87,6 +87,15 @@ class RolePermissionSeeder extends Seeder
                     'orderLog',
                 ]
             ],
+            [
+                'group_name'=> 'Document',
+                'permissions'=>[
+                    'document.list',
+                    'document.create',
+                    'document.store',
+                    'document.delete'
+                ]
+            ],
 
         ];
                 //Create and Assign Permissions

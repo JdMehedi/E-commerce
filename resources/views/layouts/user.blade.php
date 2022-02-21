@@ -215,30 +215,33 @@
                         </li>
                         @endif
                         <?php
-
-
-                        $members = array('notices', 'notices/add');
+                        $members = array('document/list', 'document/create');
                         ?>
-                        <li class="nav-item {{ in_array(Request::path(), $members) ? 'active' : '' }}">
+                        @if (!is_null(Auth::user()) &&  (Auth::user()->can('document.list') || Auth::user()->can('document.create')))
+                            <li class="nav-item {{ in_array(Request::path(), $members) ? 'active' : '' }}">
                             <a  href="javascript:;" class="nav-link nav-toggle">
-                                <i  class="fa fa-user"></i>
-                                <span  class="title">Notice</span>
+                                <i  class="fa fa-file"></i>
+                                <span  class="title">Document</span>
                                 <span  class="arrow {{ in_array(Request::path(), $members) ? 'open' : '' }}"></span>
                             </a>
                             <ul  class="sub-menu">
-                                <li  class="nav-item {{ Request::path() == 'notices/add' ? 'active' : '' }}">
-                                    <a   href="{{ URL::to('notices/add') }}" class="nav-link ">
-                                        <span  class="title">Add Notice</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item {{ Request::path() == 'notices' ? 'active' : '' }}">
-                                    <a  href="{{ URL::to('notices') }}" class="nav-link ">
-                                        <span class="title">Notice List</span>
-                                    </a>
-                                </li>
+                                @if($user->can('document.create'))
+                                    <li  class="nav-item {{ Request::path() == 'document/create' ? 'active' : '' }}">
+                                        <a   href="{{ URL::to('document/create') }}" class="nav-link ">
+                                            <span  class="title">Add Document</span>
+                                        </a>
+                                    </li>
+                                @endif
+                                @if($user->can('document.list'))
+                                    <li class="nav-item {{ Request::path() == 'document/list' ? 'active' : '' }}">
+                                        <a  href="{{ URL::to('document/list') }}" class="nav-link ">
+                                            <span class="title">Document List</span>
+                                        </a>
+                                    </li>
+                                @endif
                             </ul>
                         </li>
-
+                        @endif
                         <?php
                         $user=Auth::user();
                         $members = array('shippers', 'consignees');

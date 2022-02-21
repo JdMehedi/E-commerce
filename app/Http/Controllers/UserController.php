@@ -34,20 +34,10 @@ class UserController extends Controller
             return view('errors.403', compact('message'));
         }
 
-
-        $userId=Auth::user()->id;
-        $data1['userTable']= DB::table('users')
-            ->where('users.id','=',$userId)
-            ->first();
-
         $data['users']=User::all();
 
-        return view('admin.set.userList', $data,$data1);
+        return view('admin.set.userList', $data);
     }
-
-    /*  public function addUser(){
-          return view('admin.set.userAddEdit');
-      } */
 
     public function saveUser(Request $request){
         if (is_null($this->user) ||  !$this->user->can('user.save')) {
@@ -89,13 +79,14 @@ class UserController extends Controller
                 }
             }
             $status=$request->status;
-            $profile_image=$data->profile_image;
-            if(!empty($profile_image)){
-                unlink('uploads/personalPhotos/'.$profile_image);
-            }
-            if(!empty($request->file('profile_image')))
-                $data->profile_image= $this->uploadimage($request->file('profile_image'),'uploads/personalPhotos/','','','');
 
+            if(!empty($request->file('profile_image'))){
+                $profile_image=$data->profile_image;
+                if(!empty($profile_image)){
+                    unlink('uploads/personalPhotos/'.$profile_image);
+                }
+                $data->profile_image= $this->uploadimage($request->file('profile_image'),'uploads/personalPhotos/','','','');
+            }
         }
         else{
             $validator = \Validator::make($request->all(), [
@@ -135,7 +126,6 @@ class UserController extends Controller
         }
         else{
             return redirect('users/add')->with('error_message','Unsuccessful,Please try again');
-
         }
     }
 
