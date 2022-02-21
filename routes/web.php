@@ -15,6 +15,18 @@
 Route::get('/', function () {
    return view('auth.login');
 });
+
+
+//Documents
+
+Route::group(['prefix' => 'document'], function () {
+    Route::get('/list','DocumentController@listDocument')->name('document.list');
+    Route::get('/create','DocumentController@createDocument')->name('document.create');
+    Route::post('/store','DocumentController@storeDocument')->name('document.store');
+    Route::get('/delete','DocumentController@deleteDocument')->name('document.delete');
+    Route::get('downLoadFile/{id}','DocumentController@documentDownloadFile')->name('document.downLoadFile');
+});
+
 //Roles
 Route::group(['prefix' => ''], function () {
     Route::resource('roles', 'RolesController');
@@ -32,42 +44,6 @@ Route::get('users/edit','UserController@editUser')->name('user.edit');
 Route::get('users/delete','UserController@deleteUser')->name('user.delete');
 Route::post('users/save','UserController@saveUser')->name('user.save');
 
-Route::group(['middleware' => 'customAuth'], function(){
-
-//    userdetails    list with search
-
-    Route::post('userDetails/search', 'UserController@listUserDetailsSearch');
-    Route::get('userDetails/search', 'UserController@listUserDetailsSearch');
-
-
-
-
-    Route::get('uDetails','UserController@listUserDetails');
-    Route::get('userDetails/add','UserController@addUserDetails');
-    Route::get('userDetails/edit','UserController@editUserDetails');
-    Route::get('userDetails/delete','UserController@deleteUserDetails');
-    Route::post('userDetails/save','UserController@saveUserDetails');
-
-
-
-    //    Notice list Add, Edit, Delete
-
-    Route::get('notices/add','NoticeController@addNotice');
-    Route::get('notices/edit','NoticeController@editNotice');
-    Route::get('notices/delete','NoticeController@deleteNotice');
-    Route::post('notices/save','NoticeController@saveNotice');
-
-
-//    userlist with search
-
-    Route::post('users/search', 'UserController@listUserSearch');
-    Route::get('users/search', 'UserController@listUserSearch');
-
-});
-
-//notice list
-
-Route::get('notices','NoticeController@listNotice');
 
 // orderLog List
 
@@ -83,6 +59,7 @@ Route::post('passwordSave','ProfileController@savePassword');
 
 
 Route::get('profileDisplay','ProfileController@displayProfile');
+Route::post('profileUpdate','ProfileController@profileUpdate');
 Route::get('particularProfile','ProfileController@displayParticularProfile');
 
 Auth::routes([
@@ -95,12 +72,9 @@ Auth::routes();
 //Auth::routes(['register']);
 //Auth::routes(['login']);
 
-Route::post('studentLogin','StudentController@loginStudent');
-
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('download-file-{id}','WelcomeController@downloadFile')->name('downLoadFile');
 //shipper
 Route::get('shipper/create','ShippersController@create')->name('shipper.create');
 Route::post('shipper/store','ShippersController@store')->name('shipper.store');

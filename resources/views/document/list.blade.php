@@ -17,7 +17,7 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <a href="#">Notice List</a>
+                <a href="#">Document List</a>
             </li>
         </ul>
     </div>
@@ -25,13 +25,13 @@
     <!-- BEGIN PAGE TITLE-->
     <div class="content">
         <div class="col-md-6">
-            <h3 class="page-title"> Notice List </h3>
+            <h3 class="page-title"> Document List </h3>
         </div>
-        @if(($userTable)&&$userTable->userType==1)
+
         <div class="btn-group right" style="float:right;padding-top:25px">
-            <a href="{{ URL::to('notices/add') }}" class="btn btn-sm red"><i class="fa fa-plus"></i>  Add Notice</a>
+            <a href="{{ URL::to('document/create') }}" class="btn btn-sm red"><i class="fa fa-plus"></i>  Add Document</a>
         </div>
-        @endif
+
     </div>
     <!-- END PAGE TITLE-->
     <!-- END PAGE HEADER-->
@@ -47,31 +47,29 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Title</th>
-                            <th>Notice File</th>
-                            <th>Time</th>
-                            @if(($userTable)&&$userTable->userType==1)
+                            <th>Order Number</th>
+                            <th>Document Type</th>
+                            <th> File</th>
+                            <th>Created Date</th>
                             <th>ACTION</th>
-                                @endif
+
                         </tr>
                         </thead>
                         <tbody>
 
-                        @if(isset($nots[0]))
-                            @foreach($nots as $not)
+                        @if(!empty($documents))
+                            @foreach($documents as $document)
 
                                 <tr>
-                                    <td>{{$not->id}}</td>
-                                    <td>{{$not->ntitle}}</td>
-
-                                    <td><a target="_blank"  href="{{route('downLoadFile',encrypt($not->nfile))}}">File</a></td>
-                                    <td>{{\Carbon\Carbon::parse($not->updated_at)->diffForhumans()}}</td>
-                                    @if(($userTable)&&$userTable->userType==1)
+                                    <td>{{$document->id}}</td>
+                                    <td>{{$document->order_info->order_number}}</td>
+                                    <td>{{$document->document_type_info->name}}</td>
+                                    <td><a target="_blank"  href="{{route('document.downLoadFile', encrypt($document->file_name))}}">File</a></td>
+                                    <td>{{\Carbon\Carbon::parse($document->updated_at)->diffForhumans()}}</td>
                                     <td>
-                                        <a href="{{url('notices/edit').'?id='.$not->id}}" class="btn btn-xs blue"> <i class="fa fa-edit"></i>Edit /</a>
-                                        <a href="{{url('notices/delete').'?id='.$not->id}}" class="btn btn-xs red" onclick="return confirm('Do You want to confirm the notice delete?')"><i class="fa fa-trash" title="delete"></i>Delete</a>
+                                        <a href="{{url('document/delete').'?id='.$document->id}}" class="btn btn-xs red" onclick="return confirm('Do You want to confirm the document delete?')"><i class="fa fa-trash" title="delete"></i>Delete</a>
                                     </td>
-                                        @endif
+
                                 </tr>
 
                             @endforeach

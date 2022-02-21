@@ -34,7 +34,7 @@ class CreateUsersTable extends Migration
             $table->string('state')->nullable();
             $table->string('zipcode')->nullable();
             $table->string('hashval')->nullable();
-            $table->integer('status')->nullable();
+            $table->tinyInteger('status')->default(1)->comment('1= enable, 0=disable');
             $table->string('same_as')->nullable();
             $table->string('module_id')->nullable();
             $table->string('slug')->nullable();
