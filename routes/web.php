@@ -107,3 +107,14 @@ Route::post('consigneeContact/store','ConsigneeContactController@store')->name('
 Route::get('consigneeContact/edit/{slug}','ConsigneeContactController@edit')->name('consignee.contact.edit');
 Route::post('consigneeContact/update','ConsigneeContactController@update')->name('consignee.contact.update');
 Route::get('consigneeContact/delete/{slug}','ConsigneeContactController@destroy')->name('consignee.contact.destroy');
+
+//orders
+Route::get('orders/create','OrdersController@create')->name('orders.create');
+Route::post('orders/store','OrdersController@store')->name('orders.store');
+Route::get('shipper_info_order_form','OrdersController@shipper_info_order_form')->name('shipper_info_order_form');
+Route::get('consignee_info_order_form','OrdersController@consignee_info_order_form')->name('consignee_info_order_form');
+Route::get('shipper_contact_info_order_form','OrdersController@shipper_contact_info_order_form')->name('shipper_contact_info_order_form');
+Route::get('consignee_contact_info_order_form','OrdersController@consignee_contact_info_order_form')->name('consignee_contact_info_order_form');
+Route::get('party_info_order_form','OrdersController@party_info_order_form')->name('party_info_order_form');
+Route::get('party_contact_info_order_form','OrdersController@party_contact_info_order_form')->name('party_contact_info_order_form');
+
