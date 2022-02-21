@@ -5,10 +5,19 @@ namespace App\Http\Controllers;
 use App\User;
 use App\UserContact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class ConsigneeContactController extends Controller
 {
+    public $user;
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::user();
+            return $next($request);
+        });
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -16,6 +25,10 @@ class ConsigneeContactController extends Controller
      */
     public function create(UserContact $userContact,$slug)
     {
+        if (is_null($this->user) ||  !$this->user->can('consignee.contact.create')) {
+            $message = 'You are not allowed to access this page !';
+            return view('errors.403', compact('message'));
+        }
         $data['lists']=User::where('slug',$slug)->first();
         return view ('admin.consignee.contact.create',$data)->with('data',$userContact);
     }
@@ -28,6 +41,10 @@ class ConsigneeContactController extends Controller
      */
     public function store(Request $request)
     {
+        if (is_null($this->user) ||  !$this->user->can('consignee.contact.store')) {
+            $message = 'You are not allowed to access this page !';
+            return view('errors.403', compact('message'));
+        }
         $request->validate([
             'contact' => 'required|max:255',
             'email' => 'required|unique:user_contacts',
@@ -65,6 +82,10 @@ class ConsigneeContactController extends Controller
      */
     public function edit(UserContact $userContact,$slug)
     {
+        if (is_null($this->user) ||  !$this->user->can('consignee.contact.edit')) {
+            $message = 'You are not allowed to access this page !';
+            return view('errors.403', compact('message'));
+        }
         $data['lists']=UserContact::where('slug',$slug)->first();
         return view ('admin.consignee.contact.edit',$data);
 
@@ -79,6 +100,10 @@ class ConsigneeContactController extends Controller
      */
     public function update(Request $request)
     {
+        if (is_null($this->user) ||  !$this->user->can('consignee.contact.update')) {
+            $message = 'You are not allowed to access this page !';
+            return view('errors.403', compact('message'));
+        }
         $data = UserContact::where("id",$request->id)->first();
         $data->update([
             $data->contact=$request->contact,
@@ -99,6 +124,10 @@ class ConsigneeContactController extends Controller
      */
     public function destroy($slug)
     {
+        if (is_null($this->user) ||  !$this->user->can('consignee.contact.destroy')) {
+            $message = 'You are not allowed to access this page !';
+            return view('errors.403', compact('message'));
+        }
         $data= UserContact::where("slug",$slug)->first();
         $data->delete();
         return redirect()->back();
