@@ -38,10 +38,10 @@ class OrderLogController extends Controller
                 $order_logs->where('order_number','<=', $request->get('order_number_end_filter'));
             }
             if(!empty($request->start_date_filter)){
-                $order_logs->whereDate('created', '>=',$request->get('start_date_filter'));
+                $order_logs->whereDate('created_at', '>=',$request->get('start_date_filter'));
             }
             if(!empty($request->end_date_filter)){
-                $order_logs->whereDate('created', '<=',$request->get('end_date_filter'));
+                $order_logs->whereDate('created_at', '<=',$request->get('end_date_filter'));
             }
             if(!empty($request->PO_No_filter)){
                 $order_logs->where('PO_No','LIKE', "%{$request->get('PO_No_filter')}%");
@@ -101,10 +101,10 @@ class OrderLogController extends Controller
                 ->editColumn('delivery_address', function ($row) {
                     return $row->delivery_address;
                 })
-                ->editColumn('created', function ($row) {
+                ->editColumn('created_at', function ($row) {
                     $html = "";
-                    if(!empty($row->created)){
-                        $html = date_format(date_create($row->created),'Y-m-d');
+                    if(!empty($row->created_at)){
+                        $html = date_format(date_create($row->created_at),'Y-m-d');
                     }
                     return $html;
                 })
@@ -127,7 +127,7 @@ class OrderLogController extends Controller
 
             $rawColumns = [
                 'order_number',
-                'created',
+                'created_at',
                 'shipper_id',
                 'consignee_id',
                 'PO_No',
