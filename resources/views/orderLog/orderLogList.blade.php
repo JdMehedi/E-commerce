@@ -26,7 +26,7 @@
             <h3 class="page-title"> OrderLog List</h3>
         </div>
         <div class="btn-group right" style="float:right;padding-top:25px">
-            <a href="{{ URL::to('addOrder') }}" class="btn btn-sm red"><i class="fa fa-plus"></i>  Add Order </a>
+            <a href="{{ URL::to('orders/create') }}" class="btn btn-sm red"><i class="fa fa-plus"></i>  Add Order </a>
         </div>
         <div class="portlet-body form">
 

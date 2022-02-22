@@ -8,7 +8,7 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>Sheikh Rasel Hall Management System</title>
+        <title>anson</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="" name="description" />
@@ -92,7 +92,7 @@
 
                 <div style="background-color: #3e6562;" class="page-logo">
                     <a href="{{ URL::to('adminUser') }}">
-                        <img src="{{ URL::to('/') }}/sharing/images/srh2.png" alt="logo" class="logo-default" width="80"/> </a>
+                        <img style="width: 110px!important; margin-top: 11px!important;" src="{{ URL::to('/') }}/sharing/images/srh2.png" alt="logo" class="logo-default" width="80"/> </a>
                     <div class="menu-toggler sidebar-toggler">
                         <span></span>
                     </div>
@@ -174,42 +174,14 @@
                             </a>
                         </li>
                         <?php
-
-                        $members = array('users', 'users/add');
                         $user=Auth::user();
                         ?>
-                        @if (!is_null(Auth::user()) &&  (Auth::user()->can('adduser') || Auth::user()->can('userlist')))
 
-                        <li class="nav-item {{ in_array(Request::path(), $members) ? 'active' : '' }}">
-                            <a  href="javascript:;" class="nav-link nav-toggle">
-                                <i  class="fa fa-user"></i>
-                                <span  class="title">User</span>
-                                <span  class="arrow {{ in_array(Request::path(), $members) ? 'open' : '' }}"></span>
-                            </a>
-                            <ul class="sub-menu">
-                                @if($user->can('adduser'))
-                                <li class="nav-item {{ Request::path() == 'users/add' ? 'active' : '' }}">
-                                    <a  href="{{ URL::to('users/add') }}" class="nav-link ">
-                                        <span class="title">Add User</span>
-                                    </a>
-                                </li>
-                                @endif
-                                @if($user->can('userlist'))
-                                <li class="nav-item {{ Request::path() == 'users' ? 'active' : '' }}">
-                                    <a  href="{{ URL::to('users') }}" class="nav-link ">
-                                        <span class="title">UserList</span>
-                                    </a>
-                                </li>
-                                    @endif
-                            </ul>
-                        </li>
-                        @endif
-                        
                         @if (!is_null(Auth::user()) &&  (Auth::user()->can('orderLog')))
                         <li  class="nav-item {{ Request::path() == 'orderLog' ? 'active' : '' }}">
                             <a href="{{ URL::to('orderLog') }}" class="nav-link">
                                 <i class="fa fa-shopping-cart"></i>
-                                <span class="title">OrderLog</span>
+                                <span class="title">Order</span>
                                 <span  class="selected"></span>
                             </a>
                         </li>
@@ -250,7 +222,7 @@
                         <li class="nav-item {{ in_array(Request::path(), $members) ? 'active' : '' }}">
                             <a  href="javascript:;" class="nav-link nav-toggle">
                                 <i  class="fa fa-user"></i>
-                                <span  class="title">Trucker</span>
+                                <span  class="title">List</span>
                                 <span  class="arrow {{ in_array(Request::path(), $members) ? 'open' : '' }}"></span>
                             </a>
                             <ul  class="sub-menu">
@@ -273,7 +245,37 @@
                             </ul>
                         </li>
                         @endif
+                        <?php
 
+                        $members = array('users', 'users/add');
+                        $user=Auth::user();
+                        ?>
+                        @if (!is_null(Auth::user()) &&  (Auth::user()->can('adduser') || Auth::user()->can('userlist')))
+
+                            <li class="nav-item {{ in_array(Request::path(), $members) ? 'active' : '' }}">
+                                <a  href="javascript:;" class="nav-link nav-toggle">
+                                    <i  class="fa fa-user"></i>
+                                    <span  class="title">User</span>
+                                    <span  class="arrow {{ in_array(Request::path(), $members) ? 'open' : '' }}"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    @if($user->can('adduser'))
+                                        <li class="nav-item {{ Request::path() == 'users/add' ? 'active' : '' }}">
+                                            <a  href="{{ URL::to('users/add') }}" class="nav-link ">
+                                                <span class="title">Add User</span>
+                                            </a>
+                                        </li>
+                                    @endif
+                                    @if($user->can('userlist'))
+                                        <li class="nav-item {{ Request::path() == 'users' ? 'active' : '' }}">
+                                            <a  href="{{ URL::to('users') }}" class="nav-link ">
+                                                <span class="title">UserList</span>
+                                            </a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </li>
+                        @endif
                     <?php
                         $members = array('roles', 'roles/create');
                         $user=Auth::user();
