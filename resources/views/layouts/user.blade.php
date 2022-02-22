@@ -214,6 +214,28 @@
                             </ul>
                         </li>
                         @endif
+
+
+                        @if (!is_null(Auth::user()) &&  (Auth::user()->can('invoice.list')))
+                            <li  class="nav-item {{ Request::path() == 'invoice/list' ? 'active' : '' }}">
+                                <a href="{{ URL::to('invoice/list') }}" class="nav-link">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <span class="title">Invoice</span>
+                                    <span  class="selected"></span>
+                                </a>
+                            </li>
+                        @endif
+
+                        @if (!is_null(Auth::user()) &&  (Auth::user()->can('shipment.summary.list')))
+                            <li  class="nav-item {{ Request::path() == 'shipment/summary/list' ? 'active' : '' }}">
+                                <a href="{{ URL::to('shipment/summary/list') }}" class="nav-link">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <span class="title">Shipment Summary</span>
+                                    <span  class="selected"></span>
+                                </a>
+                            </li>
+                        @endif
+
                         <?php
                         $user=Auth::user();
                         $members = array('shippers', 'consignees');

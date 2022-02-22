@@ -96,6 +96,18 @@ class RolePermissionSeeder extends Seeder
                     'document.delete'
                 ]
             ],
+            [
+                'group_name'=> 'Invoice',
+                'permissions'=>[
+                    'invoice.list',
+                ]
+            ],
+            [
+                'group_name'=> 'Shipment Summary',
+                'permissions'=>[
+                    'shipment.summary.list',
+                ]
+            ],
 
         ];
                 //Create and Assign Permissions

@@ -16,6 +16,17 @@ Route::get('/', function () {
    return view('auth.login');
 });
 
+//invoice
+
+Route::group(['prefix' => 'invoice'], function () {
+    Route::get('/list','InvoiceController@listInvoice')->name('invoice.list');
+});
+
+//shipment summary
+
+Route::group(['prefix' => 'shipment/summary'], function () {
+    Route::get('/list','ShipmentSummaryController@listShipmentSummary')->name('shipment.summary.list');
+});
 
 //Documents
 

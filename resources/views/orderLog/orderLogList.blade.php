@@ -266,7 +266,7 @@
             ],
             columns: [
                 {data: 'order_number', name: 'order_number'},
-                {data: 'created', name: 'created'},
+                {data: 'created_at', name: 'created_at'},
                 {data: 'PO_No', name: 'PO_No'},
                 {data: 'shipper_id', name: 'shipper_info.fname'},
                 {data: 'consignee_id', name: 'consignee_info.fname'},
