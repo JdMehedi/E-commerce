@@ -25,6 +25,7 @@ class ConsigneeController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
+        
         $data['lists'] = DB::table('users')
             ->leftJoin('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')->where('role_id',1)
             ->get();
@@ -36,6 +37,7 @@ class ConsigneeController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
+
         return view ('admin.consignee.create')->with('data',$user);
     }
 
@@ -44,6 +46,7 @@ class ConsigneeController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
+
         $request->validate([
             'shipper' => 'required|max:255',
             'nickName' => 'required|max:100',
@@ -52,7 +55,6 @@ class ConsigneeController extends Controller
         $data->fname=$request->shipper;
         $data->nick_name=$request->nickName;
         $data->password=bcrypt(123456);
-        $data->slug  = Str::slug($request->nickName);
         $roles = ["1"];
         foreach ($roles as $role) {
             $data->assignRole($role);
@@ -64,6 +66,7 @@ class ConsigneeController extends Controller
                 ->withInput()
                 ->with("err_message", __('Failed to insert'));
         }
+
         return redirect()->route("consignee.index")
             ->with("success_message", __("Data inserted successfully"));
     }
@@ -82,6 +85,7 @@ class ConsigneeController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
+
         $data = User::where("id",$request->id)->first();
         $data->update([
             $data->fname=$request->shipper,
@@ -96,10 +100,10 @@ class ConsigneeController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
-        $data['value']= User::where("slug",$slug)->first();
 
+        $data['value']= User::where("slug",$slug)->first();
         $data['lists']= UserContact::where('user_id',$data['value']->id)->get();
-                $data['slug']=$slug;
+        $data['slug']=$slug;
         return view ('admin.consignee.contact.index',$data);
     }
     public function destroy($slug){
@@ -107,6 +111,7 @@ class ConsigneeController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
+
         $data= User::where("slug",$slug)->first();
         $data->delete();
         return redirect()->back();

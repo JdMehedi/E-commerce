@@ -111,14 +111,14 @@ class OrderLogController extends Controller
                 ->addColumn(
                     'orderLogUpdate',
                     function ($row) {
-                        $html = '<a class="btn btn-default btn-xs btn-primary"   title="Update OrderLog" href="'.url('OrderLogUpdate', Crypt::encrypt($row->id)).'"><i class="fa fa-edit"></i></a>';
+                        $html = '<a class="btn btn-default btn-xs btn-primary"   title="Update OrderLog" href="'.url('orders/edit', Crypt::encrypt($row->id)).'"><i class="fa fa-edit"></i></a>';
                         return $html;
                     }
                 )
                 ->addColumn(
                     'deleteOrderLog',
                     function ($row) {
-                        $html = '<a class="btn btn-default btn-xs btn-danger ml-1 text-white" title="Delete OrderLog" onclick="orderDeleteFunc('."'".Crypt::encrypt($row->id)."'".')"><i class="fa fa-trash"></i></a>';
+                        $html = '<a class="btn btn-default btn-xs btn-danger ml-1 text-white" title="Delete OrderLog" href="'.url('orders/delete', Crypt::encrypt($row->id)).'"><i class="fa fa-trash"></i></a>';
                         return $html;
                     }
                 )

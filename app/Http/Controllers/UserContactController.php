@@ -31,6 +31,7 @@ class UserContactController extends Controller
             return view('errors.403', compact('message'));
         }
         $data['lists']=User::where('slug',$slug)->first();
+        $data['slug'] = $slug;
         return view ('admin.shipper.contact.create',$data)->with('data',$userContact);
     }
 
@@ -40,7 +41,7 @@ class UserContactController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$slug)
     {
         if (is_null($this->user) ||  !$this->user->can('user.contact.store')) {
             $message = 'You are not allowed to access this page !';
@@ -72,7 +73,7 @@ class UserContactController extends Controller
                 ->withInput()
                 ->with("errors_message", __('Failed to insert'));
         }
-        return redirect()->route("shipper.index")
+        return redirect()->route("shipper.show",$slug)
             ->with("success_message", __("Data inserted successfully"));
     }
 
@@ -89,8 +90,8 @@ class UserContactController extends Controller
             return view('errors.403', compact('message'));
         }
         $data['lists']=UserContact::where('slug',$slug)->first();
+        $data['slug'] = $slug;
         return view ('admin.shipper.contact.edit',$data);
-
     }
 
     /**
@@ -100,12 +101,14 @@ class UserContactController extends Controller
      * @param  \App\UserContact  $userContact
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,$slug)
     {
         if (is_null($this->user) ||  !$this->user->can('user.contact.update')) {
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
+
+        $slug = User::where('id',$request->user_id)->first();
         $data = UserContact::where("id",$request->id)->first();
         $data->update([
             $data->contact=$request->contact,
@@ -115,7 +118,8 @@ class UserContactController extends Controller
             $data->address=$request->address,
             $data->fax=$request->fax,
         ]);
-        return redirect()->route('shipper.index')->with('success_message','Successfully shipper updated');
+        
+        return redirect()->route('shipper.show',$slug->slug)->with('success_message','Successfully shipper updated');
     }
 
     /**

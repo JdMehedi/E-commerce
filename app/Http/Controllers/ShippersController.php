@@ -31,6 +31,7 @@ class ShippersController extends Controller
             ->get();
         return view ('admin.shipper.index',$data);
     }
+
     public function create(User $shipper)
     {
         if (is_null($this->user) ||  !$this->user->can('shipper.create')) {
@@ -39,12 +40,14 @@ class ShippersController extends Controller
         }
         return view ('admin.shipper.create')->with('data',$shipper);
     }
+
     public function store(Request $request)
     {
         if (is_null($this->user) ||  !$this->user->can('shipper.store')) {
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
+
         $request->validate([
             'shipper' => 'required|max:255',
             'nickName' => 'required|max:100',
@@ -53,7 +56,6 @@ class ShippersController extends Controller
         $data->fname=$request->shipper;
         $data->nick_name=$request->nickName;
         $data->password=bcrypt(123456);
-        $data->slug  = Str::slug($request->nickName);
         $roles = ["2"];
         foreach ($roles as $role) {
             $data->assignRole($role);
@@ -65,6 +67,7 @@ class ShippersController extends Controller
                 ->withInput()
                 ->with("err_message", __('Failed to insert'));
         }
+
         return redirect()->route('shipper.index')
             ->with("success_message", __("Data inserted successfully"));
     }
@@ -84,6 +87,7 @@ class ShippersController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
+
         $data = User::where("id",$request->id)->first();
         $data->update([
             $data->fname=$request->shipper,
@@ -98,6 +102,7 @@ class ShippersController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
+
         $data['value']= User::where("slug",$slug)->first();
         $data['lists']= UserContact::where('user_id',$data['value']->id)->get();
         $data['slug']=$slug;
@@ -109,6 +114,7 @@ class ShippersController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
+        
         $data= User::where("slug",$slug)->first();
         $data->delete();
         return redirect()->back();

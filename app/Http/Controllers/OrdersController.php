@@ -9,11 +9,27 @@ use App\UserContact;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+
 
 class OrdersController extends Controller
 {
+    public $user;
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::user();
+            return $next($request);
+        });
+    }
+
     public function create()
     {
+        if (is_null($this->user) ||  !$this->user->can('orders.create')) {
+            $message = 'You are not allowed to access this page !';
+            return view('errors.403', compact('message'));
+        }
+
         $data['consignees'] = DB::table('users')
         ->leftJoin('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')->where('role_id',1)
         ->get(); 
@@ -24,8 +40,12 @@ class OrdersController extends Controller
     }
 
     public function store(Request $request){
+        if (is_null($this->user) ||  !$this->user->can('orders.store')) {
+            $message = 'You are not allowed to access this page !';
+            return view('errors.403', compact('message'));
+        }
+      
         $request->validate([
-            'order_number' => 'required|max:255',
             'PO_No' => 'required|max:100',
             'POL' => 'required|max:100',
             'POD' => 'required|max:100',
@@ -50,7 +70,12 @@ class OrdersController extends Controller
             'delivery_address' => 'required|max:100',
         ]);
         $data = new Order();
-        $data->order_number=$request->order_number;
+        $year =date("Y");
+        $year = substr( $year, -2);
+        $zero = "000";
+        $total_order = Order::max('id') + 1;
+        $order_number = $year.$zero.$total_order;
+        $data->order_number=$order_number;
         $data->PO_No=$request->PO_No;
         $data->note=$request->note;
         $data->delivery_address=$request->delivery_address;
@@ -82,7 +107,6 @@ class OrdersController extends Controller
         $data->POL=$request->POL;
       
         $user = $data->save();
-
         if(empty($user)){
             return redirect()->back()
                 ->withInput()
@@ -90,6 +114,78 @@ class OrdersController extends Controller
         }
         return redirect()->route("orderLog")
             ->with("success_message", __("Data inserted successfully"));
+    }
+
+    public function edit($id){
+        if (is_null($this->user) ||  !$this->user->can('orders.edit')) {
+            $message = 'You are not allowed to access this page !';
+            return view('errors.403', compact('message'));
+        }
+
+        $id = Crypt::decrypt($id);
+        $data['orders']= Order::where("id",$id)->first();
+        $data['consignees'] = DB::table('users')
+        ->leftJoin('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')->where('role_id',1)
+        ->get(); 
+         $data['shippers'] = DB::table('users')
+        ->leftJoin('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')->where('role_id',2)
+        ->get();
+        return view("admin.orders.edit",$data);
+    }
+
+    public function update(Request $request){
+        if (is_null($this->user) ||  !$this->user->can('orders.update')) {
+            $message = 'You are not allowed to access this page !';
+            return view('errors.403', compact('message'));
+        }
+
+        $data = Order::where("id",$request->id)->first();
+        $data->update([
+        $data->PO_No=$request->PO_No,
+        $data->note=$request->note,
+        $data->delivery_address=$request->delivery_address,
+        $data->wharfage=$request->wharfage,
+        $data->exw_local=$request->exw_local,
+        $data->freight_quote=$request->freight_quote,
+        $data->eta_ramp_date= date('Y-m-d',strtotime($request->eta_ramp_date)),
+        $data->on_board_date= date('Y-m-d',strtotime($request->on_board_date)),
+        $data->eta_port_date= date('Y-m-d',strtotime($request->eta_port_date)),
+        $data->cut_of_date= date('Y-m-d',strtotime($request->cut_of_date)),
+        $data->Commodity=$request->Commodity,
+        $data->HBL=$request->HBL,
+        $data->MBL=$request->MBL,
+        $data->quantity=$request->quantity,
+        $data->cargo_weight=$request->cargo_weight,
+        $data->seal=$request->seal,
+        $data->container=$request->container,
+        $data->vessel_voyage=$request->vessel_voyage,
+        $data->carrier=$request->carrier,
+        $data->size=$request->size,
+        $data->ramp_via=$request->ramp_via,
+        $data->POD=$request->POD,
+        $data->shipper_id=$request->shipper,
+        $data->consignee_id=$request->consignee,
+        $data->party_id=$request->party,
+        $data->shipper_contact_id=$request->shipper_contact_id,
+        $data->consignee_contact_id=$request->consignee_contact_id,
+        $data->party_contact_id=$request->party_contact_id,
+        $data->POL=$request->POL,
+        ]);
+
+        return redirect()->route('orderLog')->with('success_message','Successfully order updated');
+
+    }
+
+    public function destroy($id){
+        if (is_null($this->user) ||  !$this->user->can('orders.destroy')) {
+            $message = 'You are not allowed to access this page !';
+            return view('errors.403', compact('message'));
+        }
+
+        $id = Crypt::decrypt($id);
+        $data= Order::where("id",$id)->first();
+        $data->delete();
+        return redirect()->back();
     }
 
     public function shipper_info_order_form(Request $request){
@@ -157,5 +253,7 @@ class OrdersController extends Controller
         }
         return response()->json(['party_contact_info_order_form' => $party_contact_info_order_form]);
     }
+
+
 
 }

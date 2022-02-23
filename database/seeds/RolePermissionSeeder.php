@@ -66,6 +66,7 @@ class RolePermissionSeeder extends Seeder
                     'user.contact.create',
                     'user.contact.store',
                     'user.contact.edit',
+                    'user.contact.update',
                     'user.contact.destroy',
                     'consignee.index',
                     'consignee.create',
@@ -85,6 +86,10 @@ class RolePermissionSeeder extends Seeder
                 'group_name'=> 'Order',
                 'permissions'=>[
                     'orderLog',
+                    'orders.create',
+                    'orders.store',
+                    'orders.edit',
+                    'orders.update',
                 ]
             ],
             [

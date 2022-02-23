@@ -52,6 +52,7 @@
                         <tbody>
 
                         <?php $index = 1?>
+                    @if(!empty($lists))
                         @foreach($lists as $list)
                             <tr>
                             <td>{{$index ++}}</td>
@@ -64,6 +65,7 @@
                             </td>
                         </tr>
                         @endforeach
+                     @endif
                         </tbody>
                     </table>
                 </div>

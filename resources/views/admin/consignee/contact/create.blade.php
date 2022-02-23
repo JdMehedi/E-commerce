@@ -29,12 +29,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="portlet-body form">
-                    @if(empty($userContact->id))
-                        {!! Form::open(array('url' => url('consigneeContact/store'),'method' => 'post', 'files' => true, 'class'=>'form-horizontal') )  !!}
-                    @else
-                        {!! Form::open(array('url' => url('consigneeContact/update'),'method' => 'post', 'files' => true, 'class'=>'form-horizontal') )  !!}
-                        <input type="hidden" name="id" value="@if(!empty($UserContact->id)) {{$UserContact->id}} @endif">
-                    @endif
+                        {!! Form::open(array('url' => url('consigneeContact/store',$slug),'method' => 'post', 'files' => true, 'class'=>'form-horizontal') )  !!}
+                
                     <div class="form-body">
                         <input type="hidden"  name="user_id"  value="{{$lists->id}}" class="form-control input-inline input-medium" >
                         <div class="form-group">

@@ -20,7 +20,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="portlet-body form">
-                        {!! Form::open(array('url' => url('orders/store'),'method' => 'post', 'files' => true, 'class'=>'form-horizontal') )  !!}
+                        {!! Form::open(array('url' => url('orders/update'),'method' => 'post', 'files' => true, 'class'=>'form-horizontal') )  !!}
+                        <input type="hidden" name="id" value="@if(!empty($orders->id)) {{$orders->id}} @endif">
+
                     <div class="form-body">
                         <div class="row">
                             <div class="d-flex flex-wrap">
@@ -28,12 +30,12 @@
                                 <div class="col-md-7">
                                     <select name="shipper"  id="shipper" class="col-md-12 mb-2 selectTag">
                                         <option value="">Select a Shipper</option>
+                                @if(!empty($shippers))      
                                     @foreach($shippers as $shipper)
-                                    <option value="{{$shipper->id}}">{{$shipper->fname}}</option>
-                                    @endforeach                                    
+                                    <option value="{{$shipper->id}}" @if($orders->shipper_id == $shipper->id) selected @endif>{{$shipper->fname}}</option>
+                                    @endforeach  
+                                @endif                                  
                                     </select>
-                                   <div class="red">{{ $errors->first('shipper') }}</div>
-
 
                                 </div>
                                 <div class="col-md-3">
@@ -43,17 +45,21 @@
 
                             </div>
                         </div><br>
-
+                        <?php  
+                            $shipperContactInfo = App\UserContact::where('user_id',$orders->shipper_id)->get();
+                        ?>
                         <div class="row m-2">
                             <div class="col-md-2"></div>
                             <div class="col-md-7">
                              
                             <select class="col-md-12 mb-2 selectTag" style="background:white" name="shipper_contact_id" id="shipper_contact_id">
                              <option value="" >select shipper contact</option>
-                            
+                             @if(!empty($shipperContactInfo))
+                                @foreach($shipperContactInfo as $shipperContact)
+                                    <option value="{{$shipperContact->id}}" @if($orders->shipper_contact_id == $shipperContact->id) selected @endif>{{$shipperContact->contact}}</option>
+                                @endforeach 
+                             @endif 
                             </select> 
-                            <div class="red">{{ $errors->first('shipper_contact_id') }}</div>
-
                             <div class="col-md-3"></div>                           
                             </div>
                         </div>   
@@ -108,11 +114,9 @@
                                     <select name="consignee"  id="consignee" class="col-md-12 mb-2 selectTag">
                                         <option value="">Select a Consignee</option>
                                     @foreach($consignees as $consignee)
-                                    <option value="{{$consignee->id}}">{{$consignee->fname}}</option>
+                                        <option value="{{$consignee->id}}" @if($orders->consignee_id == $consignee->id) selected @endif>{{$consignee->fname}}</option>
                                     @endforeach                                    
                                     </select>
-                                   <div class="red">{{ $errors->first('consignee') }}</div>
-
 
                                 </div>
                                 <div class="col-md-3">
@@ -121,15 +125,20 @@
                                 </div>
 
                         </div><br>
-
+                        <?php  
+                            $consigneeContactInfo = App\UserContact::where('user_id',$orders->consignee_id)->get();
+                        ?>
                         <div class="row m-2">
                             <div class="col-md-2"></div>
                             <div class="col-md-7">
                             <select class="col-md-12 mb-2 selectTag" style="background:white" name="consignee_contact_id" id="consignee_contact_id">
                          <option value="">select consignee contact</option>
-                            </select>  
-                            <div class="red">{{ $errors->first('consignee_contact_id') }}</div>
-
+                             @if(!empty($consigneeContactInfo))
+                                @foreach($consigneeContactInfo as $consigneeContact)
+                                    <option value="{{$consigneeContact->id}}" @if($orders->consignee_contact_id == $consigneeContact->id) selected @endif>{{$consigneeContact->contact}}</option>
+                                @endforeach 
+                             @endif 
+                            </select>                             
                             </div>
                             <div class="col-md-3"></div>
                         </div>  
@@ -184,11 +193,9 @@
                                     <select name="party"  id="party" class="col-md-12 mb-2 selectTag">
                                         <option value="">Select a party</option>
                                     @foreach($consignees as $consignee)
-                                    <option value="{{$consignee->id}}">{{$consignee->fname}}</option>
+                                    <option value="{{$consignee->id}}" @if($orders->consignee_id == $consignee->id) selected @endif>{{$consignee->fname}}</option>
                                     @endforeach                                    
                                     </select>
-                            <div class="red">{{ $errors->first('party') }}</div>
-
 
                                 </div>
                                 <div class="col-md-3">
@@ -201,17 +208,23 @@
                                 </div>
 
                         </div><br>
+                        <?php  
+                            $partyContactInfo = App\UserContact::where('user_id',$orders->party_id)->get();
+                        ?>
                         <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-7">
                             <select class="col-md-12 mb-2 selectTag" style="background:white" name="party_contact_id" id="party_contact_id">
                          <option value="">select party contact</option>
-                            </select>  
-                            <div class="red">{{ $errors->first('party_contact_id') }}</div>
-
+                             @if(!empty($consigneeContactInfo))
+                                @foreach($consigneeContactInfo as $consigneeContact)
+                                    <option value="{{$consigneeContact->id}}" @if($orders->consignee_contact_id == $consigneeContact->id) selected @endif>{{$consigneeContact->contact}}</option>
+                                @endforeach 
+                             @endif 
+                            </select>                             
                             </div>
                             <div class="col-md-3"></div>
-                        </div>  
+                        </div>   
 
                         <div class="row m-2" style="display:none" id="party_cinfo">
                              
@@ -263,17 +276,12 @@
                            <div class="d-flex">
                                <label class="col-md-2 control-label" for="">PO:</label>
                                <div class="col-md-4">
-                                   <input type="text" class="form-control w-75" name="PO_No" value="" placeholder="Enter PO"> <br>
-                                   <div class="red">{{ $errors->first('PO_No') }}</div>
+                                   <input type="text" class="form-control w-75" name="PO_No" value="@if(!empty($orders->PO_No)) {{$orders->PO_No}} @endif" placeholder="Enter PO"> <br>
                                </div>
-
                            </div>
                            <label class="col-md-2 control-label" for="">POl:</label>
                            <div class="col-md-4">
-                               <input type="text" name="POL" class="form-control mt-5" placeholder="Enter POL">
-                               <div class="red">{{ $errors->first('POL') }}</div>
-
-                               
+                               <input type="text" name="POL" class="form-control mt-5" value="@if(!empty($orders->POL)) {{$orders->POL}} @endif" placeholder="Enter POL">
                            </div>
                        </div>
                        <!--  -->
@@ -281,168 +289,128 @@
                             <div class="d-flex">
                                 <label class="col-md-2 control-label" for="">POD:</label>
                                 <div class="col-md-4">
-                                    <input type="text" name="POD" class="form-control w-75" placeholder="Enter POD"> <br>
-                               <div class="red">{{ $errors->first('POD') }}</div>
-                                    
+                                    <input type="text" name="POD" class="form-control w-75" value="@if(!empty($orders->POD)) {{$orders->POD}} @endif" placeholder="Enter POD"> <br>
                                 </div>
                             </div>
                             <label class="col-md-2 control-label" for="">Ramp/Vai:</label>
                             <div class="col-md-4">
 
-                                <input type="text" name="ramp_via" class="form-control mt-5" placeholder="Enter Ramp">
-                               <div class="red">{{ $errors->first('ramp_via') }}</div>
-
+                                <input type="text" name="ramp_via" class="form-control mt-5" value="@if(!empty($orders->ramp_via)) {{$orders->ramp_via}} @endif" placeholder="Enter Ramp">
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
                                 <label class="col-md-2 control-label" for="">Size:</label>
                                 <div class="col-md-4">
-                                    <input type="text" name="size" class="form-control w-75" placeholder="Enter Size"> <br>
-                               <div class="red">{{ $errors->first('size') }}</div>
-
+                                    <input type="text" name="size" class="form-control w-75" value="@if(!empty($orders->size)) {{$orders->size}} @endif" placeholder="Enter Size"> <br>
                                 </div>
                             </div>
                             <label class="col-md-2 control-label" for="">Carrier:</label>
                             <div class="col-md-4">
-                                <input type="text" name="carrier" class="form-control mt-5" placeholder="Enter Carrier">
-                               <div class="red">{{ $errors->first('carrier') }}</div>
-
+                                <input type="text" name="carrier" class="form-control mt-5" value="@if(!empty($orders->carrier)) {{$orders->carrier}} @endif" placeholder="Enter Carrier">
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
                                 <label class="col-md-2 control-label" for="">Vassel/voyage:</label>
                                 <div class="col-md-4">
-                                    <input type="text" name="vessel_voyage" class="form-control w-75" placeholder="Enter voyage"> <br>
-                               <div class="red">{{ $errors->first('vessel_voyage') }}</div>
-
+                                    <input type="text" name="vessel_voyage" class="form-control w-75" value="@if(!empty($orders->vessel_voyage)) {{$orders->vessel_voyage}} @endif" placeholder="Enter voyage"> <br>
                                 </div>
                             </div>
                             <label class="col-md-2 control-label" for="">Container:</label>
                             <div class="col-md-4">
 
-                                <input type="text" name="container" class="form-control mt-5" placeholder="Enter Container">
-                               <div class="red">{{ $errors->first('container') }}</div>
-
+                                <input type="text" name="container" class="form-control mt-5" value="@if(!empty($orders->container)) {{$orders->container}} @endif" placeholder="Enter Container">
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
                                 <label class="col-md-2 control-label" for="">Seal:</label>
                                 <div class="col-md-4">
-                                    <input type="text" name="seal" class="form-control w-75" placeholder="Enter Seal"> <br>
-                               <div class="red">{{ $errors->first('seal') }}</div>
-
+                                    <input type="text" name="seal" class="form-control w-75" value="@if(!empty($orders->seal)) {{$orders->seal}} @endif" placeholder="Enter Seal"> <br>
                                 </div>
                             </div>
                             <label class="col-md-2 control-label" for="">Weight:</label>
                             <div class="col-md-4">
-                                <input type="text" name="cargo_weight" class="form-control mt-5" placeholder="Enter Weight">
-                               <div class="red">{{ $errors->first('cargo_weight') }}</div>
-
+                                <input type="text" name="cargo_weight" class="form-control mt-5" value="@if(!empty($orders->cargo_weight)) {{$orders->cargo_weight}} @endif" placeholder="Enter Weight">
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
                                 <label class="col-md-2 control-label" for="">Quantity:</label>
                                 <div class="col-md-4">
-                                    <input type="text" name="quantity" class="form-control w-75" placeholder="Enter Quantity"> <br>
-                               <div class="red">{{ $errors->first('quantity') }}</div>
-
+                                    <input type="text" name="quantity" class="form-control w-75" value="@if(!empty($orders->quantity)) {{$orders->quantity}} @endif" placeholder="Enter Quantity"> <br>
                                 </div>
                             </div>
                             <label class="col-md-2 control-label" for="">MBL:</label>
                             <div class="col-md-4">
 
-                                <input type="text" name="MBL" class="form-control mt-5" placeholder="Enter MBL">
-                               <div class="red">{{ $errors->first('MBL') }}</div>
-
+                                <input type="text" name="MBL" class="form-control mt-5" value="@if(!empty($orders->MBL)) {{$orders->MBL}} @endif" placeholder="Enter MBL">
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
                                 <label class="col-md-2 control-label" for="">HBL:</label>
                                 <div class="col-md-4">
-                                    <input type="text" name="HBL" class="form-control w-75" placeholder="Enter HBL"> <br>
-                               <div class="red">{{ $errors->first('HBL') }}</div>
-
+                                    <input type="text" name="HBL" class="form-control w-75" value="@if(!empty($orders->HBL)) {{$orders->HBL}} @endif" placeholder="Enter HBL"> <br>
                                 </div>
                             </div>
                             <label class="col-md-2 control-label" for="">Commodity:</label>
                             <div class="col-md-4">
 
-                                <input type="text" name="Commodity" class="form-control mt-5" placeholder="Enter Commodity">
-                               <div class="red">{{ $errors->first('Commodity') }}</div>
-
+                                <input type="text" name="Commodity" class="form-control mt-5" value="@if(!empty($orders->Commodity)) {{$orders->Commodity}} @endif" placeholder="Enter Commodity">
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
                                 <label class="col-md-2 control-label" for="">Cut off Date:</label>
                                 <div class="col-md-4">
-                                    <input type="date" name="cut_of_date" class="form-control w-75" placeholder="Enter Date"> <br>
-                               <div class="red">{{ $errors->first('cut_of_date') }}</div>
-
+                                    <input type="date" name="cut_of_date" class="form-control w-75" value="{{old('cut_of_date', date('Y-m-d'))}}" placeholder="Enter Date"> <br>
                                 </div>
                             </div>
                             <label class="col-md-2 control-label" for="">On Board Date:</label>
                             <div class="col-md-4">
 
-                                <input type="date" name="on_board_date" class="form-control mt-5" placeholder="Enter Date">
-                               <div class="red">{{ $errors->first('on_board_date') }}</div>
-
+                                <input type="date" name="on_board_date" class="form-control mt-5" value="{{old('on_board_date', date('Y-m-d'))}}" placeholder="Enter Date">
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
                                 <label class="col-md-2 control-label" for="">Eta Port Date:</label>
                                 <div class="col-md-4">
-                                    <input type="date" name="eta_port_date"  class="form-control w-75" placeholder="Enter Date"> <br>
-                               <div class="red">{{ $errors->first('eta_port_date') }}</div>
-
+                                    <input type="date" name="eta_port_date"  class="form-control w-75"  value="{{old('eta_port_date', date('Y-m-d'))}}" placeholder="Enter Date"> <br>
                                 </div>
                             </div>
                             <label class="col-md-2 control-label" for="">Eta Ramp Date:</label>
                             <div class="col-md-4">
-                                <input type="date"name="eta_ramp_date" class="form-control mt-5" placeholder="Enter Date">
-                               <div class="red">{{ $errors->first('eta_ramp_date') }}</div>
-
+                                <input type="date"name="eta_ramp_date" class="form-control mt-5"  value="{{old('eta_ramp_date', date('Y-m-d'))}}"  placeholder="Enter Date">
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
                                 <label class="col-md-2 control-label" for="">Freight Quota:</label>
                                 <div class="col-md-4">
-                                    <input type="text" name="freight_quote" class="form-control w-75" placeholder="Enter Freight Quota"> <br>
-                               <div class="red">{{ $errors->first('freight_quote') }}</div>
-
+                                    <input type="text" name="freight_quote" class="form-control w-75" value="@if(!empty($orders->freight_quote)) {{$orders->freight_quote}} @endif"  placeholder="Enter Freight Quota"> <br>
                                 </div>
                             </div>
                             <label class="col-md-2 control-label" for="">Exw Local:</label>
                             <div class="col-md-4">
 
-                                <input type="text" name="exw_local" class="form-control mt-5" placeholder="Enter Exw Local">
-                               <div class="red">{{ $errors->first('exw_local') }}</div>
-
+                                <input type="text" name="exw_local" class="form-control mt-5" value="@if(!empty($orders->exw_local)) {{$orders->exw_local}} @endif" placeholder="Enter Exw Local">
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
                                 <label class="col-md-2 control-label" for="">Wharfage:</label>
                                 <div class="col-md-4">
-                                    <input type="text" name="wharfage" class="form-control w-75" placeholder="Enter Wharfage"> <br>
-                               <div class="red">{{ $errors->first('wharfage') }}</div>
-
+                                    <input type="text" name="wharfage" class="form-control w-75" value="@if(!empty($orders->wharfage)) {{$orders->wharfage}} @endif" placeholder="Enter Wharfage"> <br>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <label class="col-md-2 control-label" for="">Delivery Address:</label>
                             <div class="col-md-10">
-                                <textarea name="delivery_address" id="" cols="80" rows="2"></textarea>
-                               <div class="red">{{ $errors->first('delivery_address') }}</div>
-
+                                <textarea name="delivery_address" id="" cols="80" rows="2">@if(!empty($orders->delivery_address)) {{$orders->delivery_address}} @endif</textarea>
                             </div>
                         </div>
                         <div class="row text-center">
@@ -489,6 +457,7 @@
 
                         success: function (data){
                            $('#shipper_contact_id').html(data.shipper_info_order_form);
+                           selectTagging();
                             
                         },
                         error: function(data){
@@ -555,6 +524,8 @@
 
                         success: function (data){
                            $('#consignee_contact_id').html(data.consignee_info_order_form);
+                           selectTagging();
+
                             
                         },
                         error: function(data){
@@ -615,6 +586,8 @@
 
                         success: function (data){
                            $('#party_contact_id').html(data.party_info_order_form);
+                           selectTagging();
+
                             
                         },
                         error: function(data){
