@@ -83,15 +83,15 @@ class OrderLogController extends Controller
                 })
                 ->editColumn('shipper_id', function ($row) {
                     $html ='';
-                    if(!empty($row->shipper_info->fname)){
-                        $html.= $row->shipper_info->fname;
+                    if(!empty($row->shipper_info->nick_name)){
+                        $html.= $row->shipper_info->nick_name;
                     }
                     return $html;
                 })
                 ->editColumn('consignee_id', function ($row) {
                     $html ='';
-                    if(!empty($row->consignee_info->fname)) {
-                        $html .= $row->consignee_info->fname;
+                    if(!empty($row->consignee_info->nick_name)) {
+                        $html .= $row->consignee_info->nick_name;
                     }
                     return $html;
                 })
@@ -105,6 +105,13 @@ class OrderLogController extends Controller
                     $html = "";
                     if(!empty($row->created_at)){
                         $html = date_format(date_create($row->created_at),'Y-m-d');
+                    }
+                    return $html;
+                })
+                ->editColumn('eta_ramp_date', function ($row) {
+                    $html = "";
+                    if(!empty($row->eta_ramp_date)){
+                        $html = date_format(date_create($row->eta_ramp_date),'Y-m-d');
                     }
                     return $html;
                 })
@@ -131,6 +138,7 @@ class OrderLogController extends Controller
                 'shipper_id',
                 'consignee_id',
                 'PO_No',
+                'eta_ramp_date',
                 'MBL',
                 'HBL',
                 'container',
