@@ -98,9 +98,9 @@ Route::get('shipper/show/{slug}','ShippersController@show')->name('shipper.show'
 
 //shipper contact
 Route::get('userContact/create/{slug}','UserContactController@create')->name('user.contact.create');
-Route::post('userContact/store','UserContactController@store')->name('user.contact.store');
+Route::post('userContact/store/{slug}','UserContactController@store')->name('user.contact.store');
 Route::get('userContact/edit/{slug}','UserContactController@edit')->name('user.contact.edit');
-Route::post('userContact/update','UserContactController@update')->name('user.contact.update');
+Route::post('userContact/update/{slug}','UserContactController@update')->name('user.contact.update');
 Route::get('userContact/delete/{slug}','UserContactController@destroy')->name('user.contact.destroy');
 
 //consignee
@@ -114,14 +114,18 @@ Route::get('consignee/show/{slug}','ConsigneeController@show')->name('consignee.
 
 //consignee contact
 Route::get('consigneeContact/create/{slug}','ConsigneeContactController@create')->name('consignee.contact.create');
-Route::post('consigneeContact/store','ConsigneeContactController@store')->name('consignee.contact.store');
+Route::post('consigneeContact/store/{slug}','ConsigneeContactController@store')->name('consignee.contact.store');
 Route::get('consigneeContact/edit/{slug}','ConsigneeContactController@edit')->name('consignee.contact.edit');
-Route::post('consigneeContact/update','ConsigneeContactController@update')->name('consignee.contact.update');
+Route::post('consigneeContact/update/{slug}','ConsigneeContactController@update')->name('consignee.contact.update');
 Route::get('consigneeContact/delete/{slug}','ConsigneeContactController@destroy')->name('consignee.contact.destroy');
 
 //orders
 Route::get('orders/create','OrdersController@create')->name('orders.create');
 Route::post('orders/store','OrdersController@store')->name('orders.store');
+Route::get('orders/edit/{id}','OrdersController@edit')->name('orders.edit');
+Route::post('orders/update','OrdersController@update')->name('orders.update');
+Route::get('orders/delete/{id}','OrdersController@destroy')->name('orders.destroy');
+
 Route::get('shipper_info_order_form','OrdersController@shipper_info_order_form')->name('shipper_info_order_form');
 Route::get('consignee_info_order_form','OrdersController@consignee_info_order_form')->name('consignee_info_order_form');
 Route::get('shipper_contact_info_order_form','OrdersController@shipper_contact_info_order_form')->name('shipper_contact_info_order_form');

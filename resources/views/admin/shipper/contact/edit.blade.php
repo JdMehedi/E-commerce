@@ -24,13 +24,13 @@
 
     <div class="content">
         <div class="col-md-6">
-            <h3 class="page-title"> Edit Contact Form </h3>
+            <h3 class="page-title"> Update Contact Form </h3>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="portlet-body form">
 
-                        {!! Form::open(array('url' => url('userContact/update'),'method' => 'post', 'files' => true, 'class'=>'form-horizontal') )  !!}
+                        {!! Form::open(array('url' => url('userContact/update',$slug),'method' => 'post', 'files' => true, 'class'=>'form-horizontal') )  !!}
                         <input type="hidden" name="id" value="@if(!empty($user->user_id)) {{$user->user_id}} @endif">
                         <input type="hidden" name="id" value="@if(!empty($lists->id)) {{$lists->id}} @endif">
                     <div class="form-body">
@@ -83,7 +83,7 @@
                                 <div class="row">
                                     <div class="col-md-offset-5 col-md-6">
                                         <button type="submit" class="btn green">
-                                            Edit contact
+                                            Update contact
                                         </button>
                                         <button type="reset" class="btn default reset">Cancel</button>
                                     </div>

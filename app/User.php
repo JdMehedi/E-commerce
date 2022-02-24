@@ -6,10 +6,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class User extends Authenticatable
 {
     use Notifiable,HasRoles;
+    use Sluggable;
 
     /**
      * The attributes that are mass assignable.
@@ -17,8 +19,17 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-         'email', 'password','fname','lname','nick_name','address','phone','mobile','contact','fax', 'profile_image','gender','DOB','country','city','state','zipcode','hashval','status','same_as','module_id',
+         'slug','email', 'password','fname','lname','nick_name','address','phone','mobile','contact','fax', 'profile_image','gender','DOB','country','city','state','zipcode','hashval','status','same_as','module_id',
     ];
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'nick_name'
+            ]
+        ];
+    }
 
     /**
      * The attributes that should be hidden for arrays.

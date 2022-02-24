@@ -25,11 +25,14 @@ class ConsigneeContactController extends Controller
      */
     public function create(UserContact $userContact,$slug)
     {
+       
         if (is_null($this->user) ||  !$this->user->can('consignee.contact.create')) {
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
+
         $data['lists']=User::where('slug',$slug)->first();
+        $data['slug'] = $slug;
         return view ('admin.consignee.contact.create',$data)->with('data',$userContact);
     }
 
@@ -39,12 +42,13 @@ class ConsigneeContactController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$slug)
     {
         if (is_null($this->user) ||  !$this->user->can('consignee.contact.store')) {
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
+
         $request->validate([
             'contact' => 'required|max:255',
             'email' => 'required|unique:user_contacts',
@@ -53,7 +57,6 @@ class ConsigneeContactController extends Controller
             'address' => 'required',
             'fax' => 'required|unique:user_contacts',
         ]);
-
         $CContact = UserContact::create([
                 'contact'=>$request->get('contact'),
                 'email'=>$request->get('email'),
@@ -71,7 +74,8 @@ class ConsigneeContactController extends Controller
                 ->withInput()
                 ->with("errors_message", __('Failed to insert'));
         }
-        return redirect()->route('consignee.index')
+
+        return redirect()->route('consignee.show',$slug)
             ->with("success_message", __("Data inserted successfully"));
     }
     /**
@@ -86,7 +90,9 @@ class ConsigneeContactController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
+
         $data['lists']=UserContact::where('slug',$slug)->first();
+        $data['slug'] = $slug;
         return view ('admin.consignee.contact.edit',$data);
 
     }
@@ -98,12 +104,14 @@ class ConsigneeContactController extends Controller
      * @param  \App\UserContact  $userContact
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,$slug)
     {
         if (is_null($this->user) ||  !$this->user->can('consignee.contact.update')) {
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
+
+        $slug = User::where('id',$request->user_id)->first();
         $data = UserContact::where("id",$request->id)->first();
         $data->update([
             $data->contact=$request->contact,
@@ -113,7 +121,7 @@ class ConsigneeContactController extends Controller
             $data->address=$request->address,
             $data->fax=$request->fax,
         ]);
-        return redirect()->route('consignee.index')->with('success_message','Successfully consignee updated');
+        return redirect()->route('consignee.show',$slug->slug)->with('success_message','Successfully consignee updated');
     }
 
     /**
@@ -128,6 +136,7 @@ class ConsigneeContactController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
+        
         $data= UserContact::where("slug",$slug)->first();
         $data->delete();
         return redirect()->back();

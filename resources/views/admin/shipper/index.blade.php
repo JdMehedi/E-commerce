@@ -52,8 +52,9 @@
                         <tbody>
 
                         <?php $index = 1?>
+                    @if(!empty($lists))
                         @foreach($lists as $list)
-                            <tr>
+                        <tr>
                             <td>{{$index ++}}</td>
                             <td>{{$list->fname}}</td>
                             <td>{{$list->nick_name}}</td>
@@ -64,6 +65,7 @@
                             </td>
                         </tr>
                         @endforeach
+                    @endif
                         </tbody>
                     </table>
                 </div>
