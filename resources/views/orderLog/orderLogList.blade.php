@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
                         </div>
-                        <div class="col-md-12">
+                        <div style="margin-top: -20px" class="col-md-12">
                             <div  class="col-md-3">
                                 <div class="form-group">
                                     <label class="control-label no-padding-right">PO#</label>
@@ -104,7 +104,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div style="margin-top: -20px" class="col-md-12">
                             <div  class="col-md-3">
                                 <div class="form-group">
                                     <label class="control-label no-padding-right">HBL</label>
@@ -154,14 +154,12 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>OrderDate</th>
-                            <th>PO#</th>
+                            <th>Date</th>
+                            <th>ETA</th>
                             <th>Shipper</th>
                             <th>Consignee</th>
+                            <th>Container No</th>
                             <th>MBL</th>
-                            <th>HBL</th>
-                            <th>Container#</th>
-                            <th>Delivery</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -267,13 +265,11 @@
             columns: [
                 {data: 'order_number', name: 'order_number'},
                 {data: 'created_at', name: 'created_at'},
-                {data: 'PO_No', name: 'PO_No'},
+                {data: 'eta_ramp_date', name: 'eta_ramp_date'},
                 {data: 'shipper_id', name: 'shipper_info.fname'},
                 {data: 'consignee_id', name: 'consignee_info.fname'},
-                {data: 'MBL', name: 'MBL'},
-                {data: 'HBL', name: 'HBL'},
                 {data: 'container', name: 'container'},
-                {data: 'delivery_address', name: 'delivery_address'},
+                {data: 'MBL', name: 'MBL'},
                 {data: 'orderLogUpdate', name: 'orderLogUpdate'},
                 {data: 'deleteOrderLog', name: 'deleteOrderLog'}
             ]
