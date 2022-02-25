@@ -7,7 +7,24 @@
 @stop
 
 @section('content')
-
+<style>
+    .MinusMargin{
+        margin-bottom:-15px;
+    }
+    .pad-24{
+        padding-left: 25px;
+    }
+    .customeheight{
+        height: 24px !important;
+    }
+    .select2-selection--single{
+        height: 24px !important;
+        padding: 2px 8px !important;
+    }
+    .paddingtopZero{
+        padding-top: 0px !important;
+    }
+</style>
     <!-- BEGIN PAGE BAR -->
     <div class="page-bar">
 
@@ -26,7 +43,7 @@
                             <div class="d-flex flex-wrap">
                                 <label class="col-md-2 control-label" for="">Shipper:</label>
                                 <div class="col-md-7">
-                                    <select name="shipper"  id="shipper" class="col-md-12 mb-2 selectTag">
+                                    <select name="shipper"  id="shipper" class="col-md-12 mb-2 selectTag ">
                                         <option value="">Select a Shipper</option>
                                     @foreach($shippers as $shipper)
                                     <option value="{{$shipper->id}}">{{$shipper->fname}}</option>
@@ -48,7 +65,7 @@
                             <div class="col-md-2"></div>
                             <div class="col-md-7">
                              
-                            <select class="col-md-12 mb-2 selectTag" style="background:white" name="shipper_contact_id" id="shipper_contact_id">
+                            <select class="col-md-12 mb-2 selectTag " style="background:white" name="shipper_contact_id" id="shipper_contact_id">
                              <option value="" >select shipper contact</option>
                             
                             </select> 
@@ -60,44 +77,54 @@
 
                         <div class="row m-2" style="display:none" id="shipper_cinfo">
                              
-                                  <div class="col-md-2"></div>
-                                <label class="col-md-1 " for=""><b>Phone:</b></label>
-                                <div class="col-md-9">
-                                    <div class="form-group" id="shipper_contact_phone">
-                                        
-                                    </div>                           
-                          
-                                </div>
-                                <div class="col-md-2"></div>
-                                <label class="col-md-1 pl-2" for=""><b>Mobile:</b></label>
-                                <div class="col-md-9">
-                                    <div class=" form-group" id="shipper_contact_mobile">
-                                   
-                                    </div>                           
-                              
-                                </div> 
-                                <div class="col-md-2"></div>
-                                <label class="col-md-1 pl-2" for=""><b>Fax:</b></label>
-                                <div class="col-md-9">
-                                    <div class=" form-group" id="shipper_contact_fax">
-                                      
-                                    </div>                           
-                             
-                                 </div> 
-                                 <div class="col-md-2"></div>              
-                                <label class="col-md-1 pl-2" for=""><b>Email:</b></label>
-                                <div class="col-md-9">
-                                    <div class="form-group" id="shipper_contact_email">
+                                 <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <label class="col-md-1 inline-block pad-24" for=""><b>Phone:</b></label>
+                                    <div class="col-md-9">
+                                        <div class="form-group MinusMargin" id="shipper_contact_phone">
+                                            
+                                        </div>                           
+                            
+                                    </div>
+                                 </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <label class="col-md-1 inline-block pad-24" for=""><b>Mobile:</b></label>
+                                    <div class="col-md-9">
+                                        <div class=" form-group MinusMargin" id="shipper_contact_mobile">
                                     
-                                    </div>                           
-                               
-                                </div>  
-                                <div class="col-md-2"></div>
-                                <label class="col-md-1 pr-2" for=""><b>Address:</b></label>
-                                <div class="col-md-9">
-                                    <div class="form-group" id="shipper_contact_address">
-                                   
-                                    </div>                           
+                                        </div>                           
+                                
+                                    </div>
+                                </div> 
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <label class="col-md-1 inline-block pad-24" for=""><b>Fax:</b></label>
+                                    <div class="col-md-9">
+                                        <div class=" form-group MinusMargin" id="shipper_contact_fax">
+                                        
+                                        </div>                           
+                                
+                                    </div>
+                                </div> 
+                                 <div class="row">
+                                    <div class="col-md-2"></div>              
+                                    <label class="col-md-1 inline-block pad-24" for=""><b>Email:</b></label>
+                                    <div class="col-md-9">
+                                        <div class="form-group MinusMargin" id="shipper_contact_email">
+                                        
+                                        </div>                           
+                                
+                                    </div> 
+                                 </div> 
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <label class="col-md-1 inline-block pad-24" for=""><b>Address:</b></label>
+                                    <div class="col-md-9">
+                                        <div class="form-group MinusMargin" id="shipper_contact_address">
+                                    
+                                        </div>                           
+                                    </div>
                                 </div>
                      
                         </div><br>
@@ -105,7 +132,7 @@
                         <div class="row m-2">
                                 <label class="col-md-2 control-label" for="">Consignee:</label>
                                 <div class="col-md-7">
-                                    <select name="consignee"  id="consignee" class="col-md-12 mb-2 selectTag">
+                                    <select name="consignee"  id="consignee" class="col-md-12 mb-2 selectTag ">
                                         <option value="">Select a Consignee</option>
                                     @foreach($consignees as $consignee)
                                     <option value="{{$consignee->id}}">{{$consignee->fname}}</option>
@@ -125,7 +152,7 @@
                         <div class="row m-2">
                             <div class="col-md-2"></div>
                             <div class="col-md-7">
-                            <select class="col-md-12 mb-2 selectTag" style="background:white" name="consignee_contact_id" id="consignee_contact_id">
+                            <select class="col-md-12 mb-2 selectTag " style="background:white" name="consignee_contact_id" id="consignee_contact_id">
                          <option value="">select consignee contact</option>
                             </select>  
                             <div class="red">{{ $errors->first('consignee_contact_id') }}</div>
@@ -136,44 +163,54 @@
 
                         <div class="row m-2" style="display:none" id="consignee_cinfo">
                              
-                                  <div class="col-md-2"></div>
-                                <label class="col-md-1 " for=""><b>Phone:</b></label>
-                                <div class="col-md-9">
-                                    <div class="form-group" id="consignee_contact_phone">
-                                        
-                                    </div>                           
-                          
-                                </div>
-                                <div class="col-md-2"></div>
-                                <label class="col-md-1 pl-2" for=""><b>Mobile:</b></label>
-                                <div class="col-md-9">
-                                    <div class=" form-group" id="consignee_contact_mobile">
-                                   
-                                    </div>                           
-                              
-                                </div> 
-                                <div class="col-md-2"></div>
-                                <label class="col-md-1 pl-2" for=""><b>Fax:</b></label>
-                                <div class="col-md-9">
-                                    <div class=" form-group" id="consignee_contact_fax">
-                                      
-                                    </div>                           
-                             
-                                 </div> 
-                                 <div class="col-md-2"></div>              
-                                <label class="col-md-1 pl-2" for=""><b>Email:</b></label>
-                                <div class="col-md-9">
-                                    <div class="form-group" id="consignee_contact_email">
+                                 <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <label class="col-md-1  pad-24 " for=""><b>Phone:</b></label>
+                                    <div class="col-md-9">
+                                        <div class="form-group MinusMargin" id="consignee_contact_phone">
+                                            
+                                        </div>                           
+                            
+                                    </div>
+                                 </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <label class="col-md-1  pad-24 pl-2" for=""><b>Mobile:</b></label>
+                                    <div class="col-md-9">
+                                        <div class=" form-group MinusMargin" id="consignee_contact_mobile">
                                     
-                                    </div>                           
-                               
-                                </div>  
-                                <div class="col-md-2"></div>
-                                <label class="col-md-1 pr-2" for=""><b>Address:</b></label>
-                                <div class="col-md-9">
-                                    <div class="form-group" id="consignee_contact_address">
-                                   
-                                    </div>                           
+                                        </div>                           
+                                
+                                    </div> 
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <label class="col-md-1 pad-24  pl-2" for=""><b>Fax:</b></label>
+                                    <div class="col-md-9">
+                                        <div class=" form-group MinusMargin" id="consignee_contact_fax">
+                                        
+                                        </div>                           
+                                
+                                    </div> 
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>              
+                                    <label class="col-md-1 pad-24  pl-2" for=""><b>Email:</b></label>
+                                    <div class="col-md-9">
+                                        <div class="form-group MinusMargin" id="consignee_contact_email">
+                                        
+                                        </div>                           
+                                
+                                    </div>  
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <label class="col-md-1  pad-24 pr-2" for=""><b>Address:</b></label>
+                                    <div class="col-md-9">
+                                        <div class="form-group MinusMargin" id="consignee_contact_address">
+                                    
+                                        </div>                           
+                                    </div>
                                 </div>
                      
                         </div><br>
@@ -181,7 +218,7 @@
                         <div class="row m-2">
                                 <label class="col-md-2 control-label" for="">Notifying party:</label>
                                 <div class="col-md-7">
-                                    <select name="party"  id="party" class="col-md-12 mb-2 selectTag">
+                                    <select name="party"  id="party" class="col-md-12 mb-2 selectTag ">
                                         <option value="">Select a party</option>
                                     @foreach($consignees as $consignee)
                                     <option value="{{$consignee->id}}">{{$consignee->fname}}</option>
@@ -204,7 +241,7 @@
                         <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-7">
-                            <select class="col-md-12 mb-2 selectTag" style="background:white" name="party_contact_id" id="party_contact_id">
+                            <select class="col-md-12 mb-2 selectTag " style="background:white" name="party_contact_id" id="party_contact_id">
                          <option value="">select party contact</option>
                             </select>  
                             <div class="red">{{ $errors->first('party_contact_id') }}</div>
@@ -215,44 +252,54 @@
 
                         <div class="row m-2" style="display:none" id="party_cinfo">
                              
-                                  <div class="col-md-2"></div>
-                                <label class="col-md-1 " for=""><b>Phone:</b></label>
-                                <div class="col-md-9">
-                                    <div class="form-group" id="party_contact_phone">
-                                        
-                                    </div>                           
-                          
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <label class="col-md-1  pad-24 " for=""><b>Phone:</b></label>
+                                    <div class="col-md-9">
+                                        <div class="form-group MinusMargin" id="party_contact_phone">
+                                            
+                                        </div>                           
+                            
+                                    </div>
                                 </div>
+                              <div class="row">
                                 <div class="col-md-2"></div>
-                                <label class="col-md-1 pl-2" for=""><b>Mobile:</b></label>
-                                <div class="col-md-9">
-                                    <div class=" form-group" id="party_contact_mobile">
-                                   
-                                    </div>                           
-                              
-                                </div> 
-                                <div class="col-md-2"></div>
-                                <label class="col-md-1 pl-2" for=""><b>Fax:</b></label>
-                                <div class="col-md-9">
-                                    <div class=" form-group" id="party_contact_fax">
-                                      
-                                    </div>                           
-                             
-                                 </div> 
-                                 <div class="col-md-2"></div>              
-                                <label class="col-md-1 pl-2" for=""><b>Email:</b></label>
-                                <div class="col-md-9">
-                                    <div class="form-group" id="party_contact_email">
+                                    <label class="col-md-1 pad-24  pl-2" for=""><b>Mobile:</b></label>
+                                    <div class="col-md-9">
+                                        <div class=" form-group MinusMargin" id="party_contact_mobile">
                                     
-                                    </div>                           
-                               
-                                </div>  
+                                        </div>                           
+                                
+                                    </div> 
+                              </div>
+                               <div class="row">
                                 <div class="col-md-2"></div>
-                                <label class="col-md-1 pr-2" for=""><b>Address:</b></label>
-                                <div class="col-md-9">
-                                    <div class="form-group" id="party_contact_address">
-                                   
-                                    </div>                           
+                                    <label class="col-md-1 pad-24  pl-2" for=""><b>Fax:</b></label>
+                                    <div class="col-md-9">
+                                        <div class=" form-group MinusMargin" id="party_contact_fax">
+                                        
+                                        </div>                           
+                                
+                                    </div> 
+                               </div>
+                               <div class="row">
+                                <div class="col-md-2"></div>              
+                                    <label class="col-md-1  pad-24 pl-2" for=""><b>Email:</b></label>
+                                    <div class="col-md-9">
+                                        <div class="form-group MinusMargin" id="party_contact_email">
+                                        
+                                        </div>                           
+                                
+                                    </div>  
+                               </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <label class="col-md-1  pad-24 pr-2" for=""><b>Address:</b></label>
+                                    <div class="col-md-9">
+                                        <div class="form-group MinusMargin" id="party_contact_address">
+                                    
+                                        </div>                           
+                                    </div>
                                 </div>
                      
                         </div><br>
@@ -261,16 +308,16 @@
 
                        <div class="row">
                            <div class="d-flex">
-                               <label class="col-md-2 control-label" for="">PO:</label>
+                               <label class="col-md-2 control-label paddingtopZero" for="">PO:</label>
                                <div class="col-md-4">
-                                   <input type="text" class="form-control w-75" name="PO_No" value="" placeholder="Enter PO"> <br>
+                                   <input type="text" class="form-control py-1 w-30 customeheight" name="PO_No" value="" placeholder="Enter PO"> <br>
                                    <div class="red">{{ $errors->first('PO_No') }}</div>
                                </div>
 
                            </div>
-                           <label class="col-md-2 control-label" for="">POl:</label>
+                           <label class="col-md-2 control-label paddingtopZero" for="">POl:</label>
                            <div class="col-md-4">
-                               <input type="text" name="POL" class="form-control mt-5" placeholder="Enter POL">
+                               <input type="text" name="POL" class="form-control mt-5 customeheight" placeholder="Enter POL">
                                <div class="red">{{ $errors->first('POL') }}</div>
 
                                
@@ -279,159 +326,159 @@
                        <!--  -->
                         <div class="row">
                             <div class="d-flex">
-                                <label class="col-md-2 control-label" for="">POD:</label>
+                                <label class="col-md-2 control-label paddingtopZero" for="">POD:</label>
                                 <div class="col-md-4">
-                                    <input type="text" name="POD" class="form-control w-75" placeholder="Enter POD"> <br>
+                                    <input type="text" name="POD" class="form-control w-30 customeheight" placeholder="Enter POD"> <br>
                                <div class="red">{{ $errors->first('POD') }}</div>
                                     
                                 </div>
                             </div>
-                            <label class="col-md-2 control-label" for="">Ramp/Vai:</label>
+                            <label class="col-md-2 control-label paddingtopZero" for="">Ramp/Vai:</label>
                             <div class="col-md-4">
 
-                                <input type="text" name="ramp_via" class="form-control mt-5" placeholder="Enter Ramp">
+                                <input type="text" name="ramp_via" class="form-control mt-5 customeheight" placeholder="Enter Ramp">
                                <div class="red">{{ $errors->first('ramp_via') }}</div>
 
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
-                                <label class="col-md-2 control-label" for="">Size:</label>
+                                <label class="col-md-2 control-label paddingtopZero" for="">Size:</label>
                                 <div class="col-md-4">
-                                    <input type="text" name="size" class="form-control w-75" placeholder="Enter Size"> <br>
+                                    <input type="text" name="size" class="form-control w-30 customeheight" placeholder="Enter Size"> <br>
                                <div class="red">{{ $errors->first('size') }}</div>
 
                                 </div>
                             </div>
-                            <label class="col-md-2 control-label" for="">Carrier:</label>
+                            <label class="col-md-2 control-label paddingtopZero" for="">Carrier:</label>
                             <div class="col-md-4">
-                                <input type="text" name="carrier" class="form-control mt-5" placeholder="Enter Carrier">
+                                <input type="text" name="carrier" class="form-control mt-5 customeheight" placeholder="Enter Carrier">
                                <div class="red">{{ $errors->first('carrier') }}</div>
 
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
-                                <label class="col-md-2 control-label" for="">Vassel/voyage:</label>
+                                <label class="col-md-2 control-label paddingtopZero" for="">Vassel/voyage:</label>
                                 <div class="col-md-4">
-                                    <input type="text" name="vessel_voyage" class="form-control w-75" placeholder="Enter voyage"> <br>
+                                    <input type="text" name="vessel_voyage" class="form-control w-30 customeheight" placeholder="Enter voyage"> <br>
                                <div class="red">{{ $errors->first('vessel_voyage') }}</div>
 
                                 </div>
                             </div>
-                            <label class="col-md-2 control-label" for="">Container:</label>
+                            <label class="col-md-2 control-label paddingtopZero" for="">Container:</label>
                             <div class="col-md-4">
 
-                                <input type="text" name="container" class="form-control mt-5" placeholder="Enter Container">
+                                <input type="text" name="container" class="form-control mt-5 customeheight" placeholder="Enter Container">
                                <div class="red">{{ $errors->first('container') }}</div>
 
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
-                                <label class="col-md-2 control-label" for="">Seal:</label>
+                                <label class="col-md-2 control-label paddingtopZero" for="">Seal:</label>
                                 <div class="col-md-4">
-                                    <input type="text" name="seal" class="form-control w-75" placeholder="Enter Seal"> <br>
+                                    <input type="text" name="seal" class="form-control w-30 customeheight" placeholder="Enter Seal"> <br>
                                <div class="red">{{ $errors->first('seal') }}</div>
 
                                 </div>
                             </div>
-                            <label class="col-md-2 control-label" for="">Weight:</label>
+                            <label class="col-md-2 control-label paddingtopZero" for="">Weight:</label>
                             <div class="col-md-4">
-                                <input type="text" name="cargo_weight" class="form-control mt-5" placeholder="Enter Weight">
+                                <input type="text" name="cargo_weight" class="form-control mt-5 customeheight" placeholder="Enter Weight">
                                <div class="red">{{ $errors->first('cargo_weight') }}</div>
 
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
-                                <label class="col-md-2 control-label" for="">Quantity:</label>
+                                <label class="col-md-2 control-label paddingtopZero" for="">Quantity:</label>
                                 <div class="col-md-4">
-                                    <input type="text" name="quantity" class="form-control w-75" placeholder="Enter Quantity"> <br>
+                                    <input type="text" name="quantity" class="form-control w-30 customeheight" placeholder="Enter Quantity"> <br>
                                <div class="red">{{ $errors->first('quantity') }}</div>
 
                                 </div>
                             </div>
-                            <label class="col-md-2 control-label" for="">MBL:</label>
+                            <label class="col-md-2 control-label paddingtopZero" for="">MBL:</label>
                             <div class="col-md-4">
 
-                                <input type="text" name="MBL" class="form-control mt-5" placeholder="Enter MBL">
+                                <input type="text" name="MBL" class="form-control mt-5 customeheight" placeholder="Enter MBL">
                                <div class="red">{{ $errors->first('MBL') }}</div>
 
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
-                                <label class="col-md-2 control-label" for="">HBL:</label>
+                                <label class="col-md-2 control-label paddingtopZero" for="">HBL:</label>
                                 <div class="col-md-4">
-                                    <input type="text" name="HBL" class="form-control w-75" placeholder="Enter HBL"> <br>
+                                    <input type="text" name="HBL" class="form-control w-30 customeheight" placeholder="Enter HBL"> <br>
                                <div class="red">{{ $errors->first('HBL') }}</div>
 
                                 </div>
                             </div>
-                            <label class="col-md-2 control-label" for="">Commodity:</label>
+                            <label class="col-md-2 control-label paddingtopZero" for="">Commodity:</label>
                             <div class="col-md-4">
 
-                                <input type="text" name="Commodity" class="form-control mt-5" placeholder="Enter Commodity">
+                                <input type="text" name="Commodity" class="form-control mt-5 customeheight" placeholder="Enter Commodity">
                                <div class="red">{{ $errors->first('Commodity') }}</div>
 
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
-                                <label class="col-md-2 control-label" for="">Cut off Date:</label>
+                                <label class="col-md-2 control-label paddingtopZero" for="">Cut off Date:</label>
                                 <div class="col-md-4">
-                                    <input type="date" name="cut_of_date" class="form-control w-75" placeholder="Enter Date"> <br>
+                                    <input type="date" name="cut_of_date" class="form-control w-30 customeheight" placeholder="Enter Date"> <br>
                                <div class="red">{{ $errors->first('cut_of_date') }}</div>
 
                                 </div>
                             </div>
-                            <label class="col-md-2 control-label" for="">On Board Date:</label>
+                            <label class="col-md-2 control-label paddingtopZero" for="">On Board Date:</label>
                             <div class="col-md-4">
 
-                                <input type="date" name="on_board_date" class="form-control mt-5" placeholder="Enter Date">
+                                <input type="date" name="on_board_date" class="form-control mt-5 customeheight" placeholder="Enter Date">
                                <div class="red">{{ $errors->first('on_board_date') }}</div>
 
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
-                                <label class="col-md-2 control-label" for="">Eta Port Date:</label>
+                                <label class="col-md-2 control-label paddingtopZero" for="">Eta Port Date:</label>
                                 <div class="col-md-4">
-                                    <input type="date" name="eta_port_date"  class="form-control w-75" placeholder="Enter Date"> <br>
+                                    <input type="date" name="eta_port_date"  class="form-control w-30 customeheight" placeholder="Enter Date"> <br>
                                <div class="red">{{ $errors->first('eta_port_date') }}</div>
 
                                 </div>
                             </div>
-                            <label class="col-md-2 control-label" for="">Eta Ramp Date:</label>
+                            <label class="col-md-2 control-label paddingtopZero" for="">Eta Ramp Date:</label>
                             <div class="col-md-4">
-                                <input type="date"name="eta_ramp_date" class="form-control mt-5" placeholder="Enter Date">
+                                <input type="date"name="eta_ramp_date" class="form-control mt-5 customeheight" placeholder="Enter Date">
                                <div class="red">{{ $errors->first('eta_ramp_date') }}</div>
 
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
-                                <label class="col-md-2 control-label" for="">Freight Quota:</label>
+                                <label class="col-md-2 control-label paddingtopZero" for="">Freight Quota:</label>
                                 <div class="col-md-4">
-                                    <input type="text" name="freight_quote" class="form-control w-75" placeholder="Enter Freight Quota"> <br>
+                                    <input type="text" name="freight_quote" class="form-control w-30 customeheight" placeholder="Enter Freight Quota"> <br>
                                <div class="red">{{ $errors->first('freight_quote') }}</div>
 
                                 </div>
                             </div>
-                            <label class="col-md-2 control-label" for="">Exw Local:</label>
+                            <label class="col-md-2 control-label paddingtopZero" for="">Exw Local:</label>
                             <div class="col-md-4">
 
-                                <input type="text" name="exw_local" class="form-control mt-5" placeholder="Enter Exw Local">
+                                <input type="text" name="exw_local" class="form-control mt-5 customeheight" placeholder="Enter Exw Local">
                                <div class="red">{{ $errors->first('exw_local') }}</div>
 
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
-                                <label class="col-md-2 control-label" for="">Wharfage:</label>
+                                <label class="col-md-2 control-label paddingtopZero" for="">Wharfage:</label>
                                 <div class="col-md-4">
-                                    <input type="text" name="wharfage" class="form-control w-75" placeholder="Enter Wharfage"> <br>
+                                    <input type="text" name="wharfage" class="form-control w-30 customeheight" placeholder="Enter Wharfage"> <br>
                                <div class="red">{{ $errors->first('wharfage') }}</div>
 
                                 </div>

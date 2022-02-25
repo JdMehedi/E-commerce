@@ -35,20 +35,7 @@
                         <input type="hidden" name="id" value="@if(!empty($lists->id)) {{$lists->id}} @endif">
                     <div class="form-body">
                         <input type="hidden"  name="user_id"  value="{{$lists->user_id}}" class="form-control input-inline input-medium" >
-                        <div class="form-group">
-                            <label class="col-md-5 control-label"> Email <span class="red">*</span> : </label>
-                            <div class="col-md-7">
-                                <input type="text"  name="email"  value="@if(!empty($lists->email)) {{$lists->email}} @endif"  placeholder="Enter email" class="form-control input-inline input-medium" >
-                                <div class="red">{{ $errors->first('contact') }}</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-5 control-label">Phone <span class="red">*</span> : </label>
-                            <div class="col-md-7">
-                                <input type="tel"  name="phone"  value="@if(!empty($lists->phone)) {{$lists->phone}} @endif"   placeholder="Enter phone number" class="form-control input-inline input-medium" >
-                                <div class="red">{{ $errors->first('phone') }}</div>
-                            </div>
-                        </div>
+
                         <div class="form-group">
                             <label class="col-md-5 control-label">Contact <span class="red">*</span> : </label>
                             <div class="col-md-7">
@@ -63,6 +50,14 @@
                                 <div class="red">{{ $errors->first('mobile') }}</div>
                             </div>
                         </div>
+                       
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Phone <span class="red">*</span> : </label>
+                            <div class="col-md-7">
+                                <input type="tel"  name="phone"  value="@if(!empty($lists->phone)) {{$lists->phone}} @endif"   placeholder="Enter phone number" class="form-control input-inline input-medium" >
+                                <div class="red">{{ $errors->first('phone') }}</div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="col-md-5 control-label">Fax <span class="red">*</span> : </label>
                             <div class="col-md-7">
@@ -71,9 +66,16 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-md-5 control-label"> Email <span class="red">*</span> : </label>
+                            <div class="col-md-7">
+                                <input type="text"  name="email"  value="@if(!empty($lists->email)) {{$lists->email}} @endif"  placeholder="Enter email" class="form-control input-inline input-medium" >
+                                <div class="red">{{ $errors->first('email') }}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-md-5 control-label">Address <span class="red">*</span> : </label>
                             <div class="col-md-7">
-                                <textarea name="address" id="address" cols="30" rows="10">@if(!empty($lists->address)) {{$lists->address}} @endif</textarea>
+                                <textarea name="address" id="address" cols="27" rows="5">@if(!empty($lists->address)) {{$lists->address}} @endif</textarea>
                                 <div class="red">{{ $errors->first('address') }}</div>
                             </div>
                         </div>
