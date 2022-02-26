@@ -15,8 +15,10 @@ use Illuminate\Support\Facades\Crypt;
 class OrdersController extends Controller
 {
     public $user;
+    public $extra_title;
     public function __construct()
     {
+        $this->extra_title = "- Order";
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
             return $next($request);
@@ -30,6 +32,7 @@ class OrdersController extends Controller
             return view('errors.403', compact('message'));
         }
 
+        $data['extra_title'] = $this->extra_title;
         $data['consignees'] = DB::table('users')
         ->leftJoin('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')->where('role_id',1)
         ->get(); 
@@ -122,6 +125,7 @@ class OrdersController extends Controller
             return view('errors.403', compact('message'));
         }
 
+        $data['extra_title'] = $this->extra_title;
         $id = Crypt::decrypt($id);
         $data['orders']= Order::where("id",$id)->first();
         $data['consignees'] = DB::table('users')

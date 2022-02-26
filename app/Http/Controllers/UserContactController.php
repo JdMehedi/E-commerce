@@ -12,8 +12,10 @@ use Illuminate\Support\Facades\Auth;
 class UserContactController extends Controller
 {
     public $user;
+    public $extra_title;
     public function __construct()
     {
+        $this->extra_title = "- User Contact";
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
             return $next($request);
@@ -30,6 +32,7 @@ class UserContactController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
+        $data['extra_title'] = $this->extra_title;
         $data['lists']=User::where('slug',$slug)->first();
         $data['slug'] = $slug;
         return view ('admin.shipper.contact.create',$data)->with('data',$userContact);
@@ -89,6 +92,7 @@ class UserContactController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
+        $data['extra_title'] = $this->extra_title;
         $data['lists']=UserContact::where('slug',$slug)->first();
         $data['slug'] = $slug;
         return view ('admin.shipper.contact.edit',$data);

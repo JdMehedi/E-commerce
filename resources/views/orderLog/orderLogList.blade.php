@@ -353,6 +353,7 @@
                 $('#filter_form').hide();
                 $('#filter_show').show();
                 selectTagging();
+                table.ajax.reload();
             });
         });
     </script>

@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\Auth;
 class ShipmentSummaryController extends Controller
 {
     public $user;
+    public $extra_title;
     public function __construct()
     {
+        $this->extra_title = "- Shipment Summary";
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
             return $next($request);
@@ -21,6 +23,7 @@ class ShipmentSummaryController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
-        return view('shipment.shipmentSummaryList');
+        $data['extra_title'] = $this->extra_title;
+        return view('shipment.shipmentSummaryList', $data);
     }
 }

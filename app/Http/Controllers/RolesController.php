@@ -11,8 +11,10 @@ use Spatie\Permission\Models\Permission;
 class RolesController extends Controller
 {
     public $user;
+    public $extra_title;
     public function __construct()
     {
+        $this->extra_title = "- Roles";
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
             return $next($request);
@@ -29,11 +31,11 @@ class RolesController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
        }
-
+        $extra_title = $this->extra_title;
         $roles=Role::all();
         $count_roles = count(DB::table('roles')->select('id')->get());
         $count_permissions = count(DB::table('permissions')->select('id')->get());
-        return view('roles.index', compact('roles','count_roles', 'count_permissions'));
+        return view('roles.index', compact('roles','count_roles', 'count_permissions', 'extra_title'));
     }
     /**
      * Show the form for creating a new resource.
@@ -46,10 +48,11 @@ class RolesController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
        }
+        $extra_title = $this->extra_title;
         $all_permissions=Permission::all();
         $permission_groups=User:: getpermissionGroups();
         // dd($permission_groups);
-        return view('roles.create',compact('all_permissions','permission_groups'));
+        return view('roles.create',compact('all_permissions','permission_groups','extra_title'));
     }
 
     /**
@@ -95,11 +98,12 @@ class RolesController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
        }
+        $extra_title = $this->extra_title;
         $role=Role::findById($id);
         $all_permissions=Permission::all();
         $permission_groups=User:: getpermissionGroups();
         // dd($permission_groups);
-        return view('roles.show',compact('role','all_permissions','permission_groups'));
+        return view('roles.show',compact('role','all_permissions','permission_groups','extra_title'));
     }
 
     /**
@@ -114,11 +118,12 @@ class RolesController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
        }
+        $extra_title = $this->extra_title;
         $role=Role::findById($id);
         $all_permissions=Permission::all();
         $permission_groups=User:: getpermissionGroups();
         // dd($permission_groups);
-        return view('roles.edit',compact('role','all_permissions','permission_groups'));
+        return view('roles.edit',compact('role','all_permissions','permission_groups','extra_title'));
     }
 
     /**

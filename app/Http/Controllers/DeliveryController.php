@@ -9,8 +9,10 @@ class DeliveryController extends Controller
 {
 
     public $user;
+    public $extra_title;
     public function __construct()
     {
+        $this->extra_title = "- Delivery";
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
             return $next($request);
@@ -22,6 +24,7 @@ class DeliveryController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
-        return view('delivery.list');
+        $data['extra_title'] = $this->extra_title;
+        return view('delivery.list', $data);
     }
 }

@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\Auth;
 class InvoiceController extends Controller
 {
     public $user;
+    public $extra_title;
     public function __construct()
     {
+        $this->extra_title = "- Invoice";
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
             return $next($request);
@@ -21,6 +23,7 @@ class InvoiceController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
-        return view('invoice.invoiceList');
+        $data['extra_title'] = $this->extra_title;
+        return view('invoice.invoiceList', $data);
     }
 }

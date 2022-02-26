@@ -15,8 +15,10 @@ use Illuminate\Support\Facades\Storage;
 class DocumentController extends Controller
 {
     public $user;
+    public $extra_title;
     public function __construct()
     {
+        $this->extra_title = "- Document";
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
             return $next($request);
@@ -28,7 +30,7 @@ class DocumentController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
-        
+        $data['extra_title'] = $this->extra_title;
         $data['orders'] = Order::get();
         $data['document_types'] = DocumentType::where('status', 1)->get();
         $data['documents']= Document::whereNull('deleted_at')->with('order_info','document_type_info')->get();
@@ -49,7 +51,8 @@ class DocumentController extends Controller
         $documents .= '<table class="table table-striped table-bordered table-hover" id="sample_1">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th style="display: none">Serial</th>
+                                    <th style="display: none">ID</th>
                                     <th>Order Number</th>
                                     <th>Document Type</th>
                                     <th> File</th>
@@ -62,7 +65,8 @@ class DocumentController extends Controller
                             foreach ($data['documents'] as $document){
                                 $documents .= "
                                     <tr>
-                                        <td>".$document->id."</td>
+                                        <td style='display: none'>".$document->document_type_info->serial."</td>
+                                        <td style='display: none'>".$document->id."</td>
                                         <td>".$document->order_info->order_number."</td>
                                         <td>".$document->document_type_info->name."</td>
                                         <td><a href=".route('document.downLoadFile', encrypt($document->file_name))."\"

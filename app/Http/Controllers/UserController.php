@@ -11,8 +11,10 @@ use Validator;
 class UserController extends Controller
 {
     public $user;
+    public $extra_title;
     public function __construct()
     {
+        $this->extra_title = "- User";
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
             return $next($request);
@@ -24,6 +26,7 @@ class UserController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
+        $data['extra_title'] = $this->extra_title;
         $data['roles'] = DB::table('roles')->get();
         return view('admin.set.userAddEdit',$data);
     }
@@ -33,7 +36,7 @@ class UserController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
-
+        $data['extra_title'] = $this->extra_title;
         $data['users']=User::all();
 
         return view('admin.set.userList', $data);
@@ -151,7 +154,7 @@ class UserController extends Controller
             return view('errors.403', compact('message'));
         }
 
-
+        $data['extra_title'] = $this->extra_title;
         $data['users'] = User::find($request->id);
         $data['roles'] = DB::table('roles')->get();
         return view('admin.set.userAddEdit',$data);

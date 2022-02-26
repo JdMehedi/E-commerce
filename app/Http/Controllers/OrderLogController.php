@@ -13,8 +13,10 @@ use Yajra\DataTables\Facades\DataTables;
 class OrderLogController extends Controller
 {
     public $user;
+    public $extra_title;
     public function __construct()
     {
+        $this->extra_title = "- Order";
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
             return $next($request);
@@ -26,7 +28,7 @@ class OrderLogController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
-
+        $data['extra_title'] = $this->extra_title;
         if (request()->ajax()) {
 
             $order_logs = Order::query()->with('shipper_info','consignee_info');
