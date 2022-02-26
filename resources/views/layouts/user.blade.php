@@ -8,7 +8,7 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>anson</title>
+        <title>ANSON Distributing LLC @if(!empty($extra_title)){{$extra_title}}@endif</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="" name="description" />
@@ -191,7 +191,37 @@
                             <li  class="nav-item {{ Request::path() == 'document/list' ? 'active' : '' }}">
                                 <a href="{{ URL::to('document/list') }}" class="nav-link">
                                     <i  class="fa fa-file"></i>
-                                    <span class="title">Document List</span>
+                                    <span class="title">Document</span>
+                                    <span  class="selected"></span>
+                                </a>
+                            </li>
+                        @endif
+
+                        @if (!is_null(Auth::user()) &&  (Auth::user()->can('freight.list')))
+                            <li  class="nav-item {{ Request::path() == 'freight/list' ? 'active' : '' }}">
+                                <a href="{{ URL::to('freight/list') }}" class="nav-link">
+                                    <i  class="fa fa-file"></i>
+                                    <span class="title">Freight</span>
+                                    <span  class="selected"></span>
+                                </a>
+                            </li>
+                        @endif
+
+                        @if (!is_null(Auth::user()) &&  (Auth::user()->can('customs.list')))
+                            <li  class="nav-item {{ Request::path() == 'customs/list' ? 'active' : '' }}">
+                                <a href="{{ URL::to('customs/list') }}" class="nav-link">
+                                    <i  class="fa fa-file"></i>
+                                    <span class="title">Customs</span>
+                                    <span  class="selected"></span>
+                                </a>
+                            </li>
+                        @endif
+
+                        @if (!is_null(Auth::user()) &&  (Auth::user()->can('delivery.list')))
+                            <li  class="nav-item {{ Request::path() == 'delivery/list' ? 'active' : '' }}">
+                                <a href="{{ URL::to('delivery/list') }}" class="nav-link">
+                                    <i  class="fa fa-file"></i>
+                                    <span class="title">Delivery</span>
                                     <span  class="selected"></span>
                                 </a>
                             </li>

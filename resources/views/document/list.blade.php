@@ -107,7 +107,8 @@
                         <table class="table table-striped table-bordered table-hover" id="sample_1">
                         <thead>
                         <tr>
-                            <th>ID</th>
+                            <th style="display: none">Serial</th>
+                            <th style="display: none">ID</th>
                             <th>Order Number</th>
                             <th>Document Type</th>
                             <th> File</th>
@@ -122,7 +123,8 @@
                             @foreach($documents as $document)
                             
                                 <tr>
-                                    <td>{{$document->id}}</td>
+                                    <td style="display: none">{{$document->document_type_info->serial}}</td>
+                                    <td style="display: none">{{$document->id}}</td>
                                     <td>{{$document->order_info->order_number}}</td>
                                     <td>{{$document->document_type_info->name}}</td>
                                     <td><a target="_blank"  href="{{route('document.downLoadFile', encrypt($document->file_name))}}"><i class="fa fa-file"></i> File</a></td>
@@ -209,7 +211,7 @@
             $('#sample_1').DataTable({
                 "iDisplayLength": 10,
                 "ordering": true,
-                "order": [[0, "desc"]],
+                "order": [[0, "asc"], [1, "asc"]],
                 "aLengthMenu": [
                     [10, 25, 50, -1],
                     [10, 25, 50, "all"]
@@ -219,7 +221,7 @@
         $('#sample_1').DataTable({
             "iDisplayLength": 10,
             "ordering": true,
-            "order": [[0, "desc"]],
+            "order": [[0, "asc"], [1, "asc"]],
             "aLengthMenu": [
                 [10, 25, 50, -1],
                 [10, 25, 50, "all"]

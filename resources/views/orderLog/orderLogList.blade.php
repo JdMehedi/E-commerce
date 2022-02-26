@@ -3,6 +3,16 @@
 @section('custom_css')
     <link href="{{asset('phq/assets/global/plugins/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('phq/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css')}}" rel="stylesheet" type="text/css" />
+    <style>
+        .select2-selection--single{
+            height: 24px !important;
+            padding: 2px 8px !important;
+        }
+        .form-control{
+            height: 24px !important;
+            padding: 2px 8px !important;
+        }
+    </style>
 @stop
 
 
@@ -25,119 +35,125 @@
         <div class="col-md-6">
             <h3 class="page-title"> OrderLog List</h3>
         </div>
+
         <div class="btn-group right" style="float:right;padding-top:25px">
             <a href="{{ URL::to('orders/create') }}" class="btn btn-sm red"><i class="fa fa-plus"></i>  Add Order </a>
         </div>
-        <div class="portlet-body form">
-
-            <form style="" class="form-horizontal" enctype="multipart/form-data" role="form" autocomplete="off">
-                <div class="form-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div  class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label no-padding-right">ID</label>
-                                    <input class="form-control" id="order_number_start_filter" placeholder="From"  name="order_number_start_filter">
-                                </div>
-                            </div>
-
-                            <div  class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label no-padding-right"> &nbsp; </label>
-                                    <input class="form-control input-medium" id="order_number_end_filter" placeholder="To"  name="order_number_end_filter">
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label no-padding-right">Date </label>
-                                    <input type="date"  class="form-control" name="start_date_filter" id="start_date_filter" placeholder="From">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
+        <div class="row">
+            <div class="col-md-12">
+            <div style="" class="portlet-body form">
+                <button id="filter_show" style="margin-left: 2%;margin-bottom: 2px"  class="btn btn-sm green"><i class="fa fa-filter"></i>  Filter </button>
+                <button id="filter_hide" style="margin-left: 2%; display: none"  class="btn btn-sm green"><i class="fa fa-eye-slash"></i>  Hide </button>
+                <form id="filter_form" style="display: none" class="form-horizontal" enctype="multipart/form-data" role="form" autocomplete="off">
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div  class="col-md-3">
                                     <div class="form-group">
-                                        <label class="control-label no-padding-right">&nbsp;</label>
-                                        <input type="date"  class="form-control input-medium" name="end_date_filter" id="end_date_filter" placeholder="To">
+                                        <label class="control-label no-padding-right">ID</label>
+                                        <input class="form-control" id="order_number_start_filter" placeholder="From"  name="order_number_start_filter">
                                     </div>
                                 </div>
-                        </div>
-                        <div style="margin-top: -20px" class="col-md-12">
-                            <div  class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label no-padding-right">PO#</label>
-                                    <input class="form-control input-medium" id="PO_No_filter" placeholder="PO#"  name="PO_No_filter">
-                                </div>
-                            </div>
 
-                            <div  class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label no-padding-right"> Shipper </label>
-                                    <select class="form-control selectTag input-medium" id="shipper_filter" placeholder="Shipper"  name="shipper_filter">
-                                        <option  value="" >Select Shipper</option>
-                                        @if(!empty($shippers))
-                                            @foreach($shippers as $shipper)
-                                                <option value="{{$shipper->id}}">{{$shipper->fname}}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
+                                <div  class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label no-padding-right"> &nbsp; </label>
+                                        <input class="form-control input-medium" id="order_number_end_filter" placeholder="To"  name="order_number_end_filter">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div  class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label no-padding-right"> Consignee </label>
-                                    <select class="form-control selectTag input-medium" id="consignee_filter" placeholder="Consignee"  name="consignee_filter">
-                                        <option  value="" >Select Consignee</option>
-                                        @if(!empty($consignees))
-                                            @foreach($consignees as $consignee)
-                                                <option value="{{$consignee->id}}">{{$consignee->fname}}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label no-padding-right">Date </label>
+                                        <input type="date"  class="form-control" name="start_date_filter" id="start_date_filter" placeholder="From">
+                                    </div>
                                 </div>
+                                <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label no-padding-right">&nbsp;</label>
+                                            <input type="date"  class="form-control input-medium" name="end_date_filter" id="end_date_filter" placeholder="To">
+                                        </div>
+                                    </div>
                             </div>
+                            <div style="margin-top: -10px" class="col-md-12">
+                                <div  class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label no-padding-right">PO#</label>
+                                        <input class="form-control input-medium" id="PO_No_filter" placeholder="PO#"  name="PO_No_filter">
+                                    </div>
+                                </div>
 
-                            <div  class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label no-padding-right">MBL</label>
-                                    <input class="form-control input-medium" id="MBL_filter" placeholder="MBL"  name="MBL_filter">
+                                <div  class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label no-padding-right"> Shipper </label>
+                                        <select class="form-control selectTag input-medium" id="shipper_filter" placeholder="Shipper"  name="shipper_filter">
+                                            <option  value="" >Select Shipper</option>
+                                            @if(!empty($shippers))
+                                                @foreach($shippers as $shipper)
+                                                    <option value="{{$shipper->id}}">{{$shipper->fname}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div  class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label no-padding-right"> Consignee </label>
+                                        <select class="form-control selectTag input-medium" id="consignee_filter" placeholder="Consignee"  name="consignee_filter">
+                                            <option  value="" >Select Consignee</option>
+                                            @if(!empty($consignees))
+                                                @foreach($consignees as $consignee)
+                                                    <option value="{{$consignee->id}}">{{$consignee->fname}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div  class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label no-padding-right">MBL</label>
+                                        <input class="form-control input-medium" id="MBL_filter" placeholder="MBL"  name="MBL_filter">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div style="margin-top: -20px" class="col-md-12">
-                            <div  class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label no-padding-right">HBL</label>
-                                    <input class="form-control input-medium" id="HBL_filter" placeholder="HBL"  name="HBL_filter">
+                            <div style="margin-top: -10px" class="col-md-12">
+                                <div  class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label no-padding-right">HBL</label>
+                                        <input class="form-control input-medium" id="HBL_filter" placeholder="HBL"  name="HBL_filter">
+                                    </div>
                                 </div>
-                            </div>
-                            <div  class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label no-padding-right">Container</label>
-                                    <input class="form-control input-medium" id="container_filter" placeholder="Container"  name="container_filter">
+                                <div  class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label no-padding-right">Container</label>
+                                        <input class="form-control input-medium" id="container_filter" placeholder="Container"  name="container_filter">
+                                    </div>
                                 </div>
-                            </div>
 
 
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label no-padding-right">Eta </label>
-                                    <input type="date"  class="form-control" name="eta_port_date_filter" id="eta_port_date_filter" placeholder="From">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label no-padding-right">Eta </label>
+                                        <input type="date"  class="form-control" name="eta_port_date_filter" id="eta_port_date_filter" placeholder="From">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label no-padding-right">&nbsp;</label>
-                                    <input type="date"  class="form-control input-medium" name="eta_ramp_date_filter" id="eta_ramp_date_filter" placeholder="To">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label no-padding-right">&nbsp;</label>
+                                        <input type="date"  class="form-control input-medium" name="eta_ramp_date_filter" id="eta_ramp_date_filter" placeholder="To">
+                                    </div>
                                 </div>
-                            </div>
 
 
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
+    </div>
     </div>
     <!-- END PAGE TITLE-->
     <!-- END PAGE HEADER-->
@@ -315,6 +331,30 @@
     <script>
         $(document).ready(function(){
             selectTagging();
+            $('#filter_show').on('click', function () {
+                $('#filter_hide').show();
+                $('#filter_form').show();
+                $('#filter_show').hide();
+            });
+            $('#filter_hide').on('click', function () {
+                $('#order_number_start_filter').val('');
+                $('#order_number_end_filter').val('');
+                $('#start_date_filter').val('');
+                $('#end_date_filter').val('');
+                $('#PO_No_filter').val('');
+                $('#shipper_filter').val('');
+                $('#consignee_filter').val('');
+                $('#container_filter').val('');
+                $('#MBL_filter').val('');
+                $('#HBL_filter').val('');
+                $('#eta_ramp_date_filter').val('');
+                $('#eta_port_date_filter').val('');
+                $('#filter_hide').hide();
+                $('#filter_form').hide();
+                $('#filter_show').show();
+                selectTagging();
+                table.ajax.reload();
+            });
         });
     </script>
 @stop

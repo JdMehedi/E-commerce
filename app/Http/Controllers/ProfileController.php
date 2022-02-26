@@ -23,8 +23,10 @@ class ProfileController extends Controller
 {
 
     public $user;
+    public $extra_title;
     public function __construct()
     {
+        $this->extra_title = "- Profile";
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
             return $next($request);
@@ -37,11 +39,11 @@ class ProfileController extends Controller
             return redirect('/');
         }
         $userId=Auth::user()->id;
-
+        $data['extra_title'] = $this->extra_title;
         $data1['cPassword']= DB::table('users')
             ->where('users.id','=',$userId)
             ->first();
-        return view('profiles.passwordChange',$data1);
+        return view('profiles.passwordChange',$data1, $data);
     }
     public function savePassword(Request $request){
 
@@ -75,6 +77,7 @@ class ProfileController extends Controller
         if(empty(Auth::user()->id)) {
             return redirect('/');
         }
+        $data['extra_title'] = $this->extra_title;
         $data['particularPro']= DB::table('users')
             ->where('users.id',Auth::user()->id,'=')
             ->first();

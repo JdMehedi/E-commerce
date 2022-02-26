@@ -12,8 +12,10 @@ use Illuminate\Support\Str;
 class ConsigneeController extends Controller
 {
     public $user;
+    public $extra_title;
     public function __construct()
     {
+        $this->extra_title = "- Consignee";
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
             return $next($request);
@@ -25,7 +27,7 @@ class ConsigneeController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
-        
+        $data['extra_title'] = $this->extra_title;
         $data['lists'] = DB::table('users')
             ->leftJoin('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')->where('role_id',1)
             ->get();
@@ -37,7 +39,7 @@ class ConsigneeController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
-
+        $data['extra_title'] = $this->extra_title;
         return view ('admin.consignee.create')->with('data',$user);
     }
 
@@ -76,6 +78,7 @@ class ConsigneeController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
+        $data['extra_title'] = $this->extra_title;
         $data['user']= User::where("slug",$slug)->first();
         return view('admin.consignee.create',$data);
     }
@@ -100,7 +103,7 @@ class ConsigneeController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
-
+        $data['extra_title'] = $this->extra_title;
         $data['value']= User::where("slug",$slug)->first();
         $data['lists']= UserContact::where('user_id',$data['value']->id)->get();
         $data['slug']=$slug;

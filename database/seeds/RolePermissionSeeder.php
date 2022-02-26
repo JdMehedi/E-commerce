@@ -113,6 +113,24 @@ class RolePermissionSeeder extends Seeder
                     'shipment.summary.list',
                 ]
             ],
+            [
+                'group_name'=> 'Freight',
+                'permissions'=>[
+                    'freight.list',
+                ]
+            ],
+            [
+                'group_name'=> 'Customs',
+                'permissions'=>[
+                    'customs.list',
+                ]
+            ],
+            [
+                'group_name'=> 'Delivery',
+                'permissions'=>[
+                    'delivery.list',
+                ]
+            ],
 
         ];
                 //Create and Assign Permissions
