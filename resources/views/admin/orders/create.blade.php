@@ -24,6 +24,9 @@
     .paddingtopZero{
         padding-top: 0px !important;
     }
+    .pointer{
+        cursor:pointer;
+    }
 </style>
     <!-- BEGIN PAGE BAR -->
     <div class="page-bar">
@@ -231,7 +234,7 @@
                                 <div class="col-md-3">
                              <a  href="{{route('consignee.index')}}"><i class="fa-solid fa-circle-plus"></i></a>
                            <span style="padding:6px">
-                           <input  type="checkbox" id="" name="" value="">
+                           <input  type="checkbox" id="sameAsConsignee"  class="pointer" name="sameAsConsignee" value="1">
                              <label for="vehicle1"> Same as Consignee</label><br>
 
                            </span>
@@ -538,12 +541,7 @@
                            $('#shipper_contact_id').html(data.shipper_info_order_form);
                             
                         },
-                        error: function(data){
-                            // console.log('error',data);
-                            $('.error_message').html('Error!! Try Again Latter');
-                            $('.error_message').show();
-                            $('.success_message').hide();
-                            
+                        error: function(data){                            
                             return;
                         }
 
@@ -573,10 +571,7 @@
                             
                         },
                         error: function(data){
-                            // console.log('error',data);
-                            $('.error_message').html('Error!! Try Again Latter');
-                            $('.error_message').show();
-                            $('.success_message').hide();
+
                             
                             return;
                         }
@@ -593,7 +588,6 @@
         $(document).ready( function (){
         $('#consignee').on('change', function (event){
            var consignee = $('#consignee').val();
-           console.log(consignee);
                     $.ajax({
                         type: 'get',                    
                         url: "{{\Illuminate\Support\Facades\URL::to('consignee_info_order_form')}}",
@@ -605,9 +599,7 @@
                             
                         },
                         error: function(data){
-                            $('.error_message').html('Error!! Try Again Latter');
-                            $('.error_message').show();
-                            $('.success_message').hide();
+                          
                             
                             return;
                         }
@@ -637,11 +629,7 @@
                             
                         },
                         error: function(data){
-                            // console.log('error',data);
-                            $('.error_message').html('Error!! Try Again Latter');
-                            $('.error_message').show();
-                            $('.success_message').hide();
-                            
+                         
                             return;
                         }
 
@@ -653,7 +641,6 @@
 
         $('#party').on('change', function (event){
            var party = $('#party').val();
-           console.log(party);
                     $.ajax({
                         type: 'get',                    
                         url: "{{\Illuminate\Support\Facades\URL::to('party_info_order_form')}}",
@@ -665,9 +652,7 @@
                             
                         },
                         error: function(data){
-                            $('.error_message').html('Error!! Try Again Latter');
-                            $('.error_message').show();
-                            $('.success_message').hide();
+                        
                             
                             return;
                         }
@@ -697,10 +682,7 @@
                             
                         },
                         error: function(data){
-                            $('.error_message').html('Error!! Try Again Latter');
-                            $('.error_message').show();
-                            $('.success_message').hide();
-                            
+                          
                             return;
                         }
 
@@ -712,6 +694,52 @@
 
 
         });
+
+        $('#sameAsConsignee').on('change', function (event){
+        var SAconsignee =$("input[name='sameAsConsignee']:checked").val();
+            if (SAconsignee == 1){
+           var consignee = $('#consignee').val();
+           var consignee_contact_id = $('#consignee_contact_id').val();
+           console.log(consignee);
+           console.log(consignee_contact_id);
+                $.ajax({
+                        type: 'get',                    
+                        url: "{{\Illuminate\Support\Facades\URL::to('sameAsConsignee')}}",
+                        dataType: 'json',
+                        data: {consignee:consignee, consignee_contact_id:consignee_contact_id},
+
+                        success: function (data){
+                           $('#party').val(consignee);
+                           $('#party_contact_id').html(data.party_info_order_form);
+                           $('#party_contact_phone').html(data.party_contact_info_order_form['phone']);
+                           $('#party_contact_mobile').html(data.party_contact_info_order_form['mobile']);
+                           $('#party_contact_email').html(data.party_contact_info_order_form['email']);
+                           $('#party_contact_fax').html(data.party_contact_info_order_form['fax']);
+                           $('#party_contact_address').html(data.party_contact_info_order_form['address']);
+
+                           $('#party_cinfo').show();
+                           selectTagging();
+                            
+                        },
+                        error: function(data){
+                          
+                            return;
+                        }
+                    });
+            }
+            else{
+                $('#party').val(0);
+                $('#party_contact_id').val(0);
+                $('#party_cinfo').hide();
+                selectTagging();
+
+
+            }
+                   
+
+
+        });
+
     </script>
 
     <script>
