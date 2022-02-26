@@ -23,28 +23,61 @@ class DocumentController extends Controller
         });
     }
 
-    public function createDocument(){
-
-        if (is_null($this->user) ||  !$this->user->can('document.create')) {
-            $message = 'You are not allowed to access this page !';
-            return view('errors.403', compact('message'));
-        }
-
-        $data['orders'] = Order::get();
-        $data['document_types'] = DocumentType::where('status', 1)->get();
-        return view('document.create',$data);
-    }
-
     public function listDocument(){
         if (is_null($this->user) ||  !$this->user->can('document.list')) {
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
+        
+        $data['orders'] = Order::get();
+        $data['document_types'] = DocumentType::where('status', 1)->get();
         $data['documents']= Document::whereNull('deleted_at')->with('order_info','document_type_info')->get();
         return view('document.list',$data);
     }
 
+    public function listDocumentByOrder(Request $request){
+        if (is_null($this->user) ||  !$this->user->can('document.list.order')) {
+            $message = 'You are not allowed to access this page !';
+            return view('errors.403', compact('message'));
+        }
+        $order_id = $request->order_id;
+        $data['documents'] = Document::whereNull('deleted_at')
+            ->where('order_id', $order_id)
+            ->with('order_info','document_type_info')->get();
+        $documents = "";
+        $documents .= '<table class="table table-striped table-bordered table-hover" id="sample_1">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Order Number</th>
+                                    <th>Document Type</th>
+                                    <th> File</th>
+                                    <th>Created Date</th>
+                                    <th>ACTION</th>
+                                </tr>
+                            </thead>
+                        <tbody>';
+                        if(!empty($data['documents'])){
+                            foreach ($data['documents'] as $document){
+                                $documents .= "
+                                    <tr>
+                                        <td>".$document->id."</td>
+                                        <td>".$document->order_info->order_number."</td>
+                                        <td>".$document->document_type_info->name."</td>
+                                        <td><a href=".route('document.downLoadFile', encrypt($document->file_name))."\"
+                            ><i class=\"fa fa-file\"></i> File </a></td>
+                                        <td>".\Carbon\Carbon::parse($document->updated_at)->diffForhumans()."</td>
+                                        <td><a href=".url('document/delete').'?id='.$document->id."\" class=\"btn btn-xs red\" onclick=\"return confirm('Do You want to confirm the document delete?')\"
+                            ><i class=\"fa fa-trash\"  title=\"delete\"></i> Delete </a></td>
+                                    </tr>
+                                ";
+                            }
+                        }
+            $documents .= '</tbody>
+            </table>';
 
+        return response()->json(['documents' => $documents]);
+    }
 
 
     public function storeDocument(Request $request){
@@ -74,7 +107,7 @@ class DocumentController extends Controller
         if ($data->save()==true){
             return redirect('document/list')->with('success_message','Sucessfully Document Created');
         }else{
-            return redirect('document/create')->with('error_message','Unsuccessful, Please try again later');
+            return redirect('document/list')->with('error_message','Unsuccessful, Please try again later');
         }
 
     }

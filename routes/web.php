@@ -32,10 +32,10 @@ Route::group(['prefix' => 'shipment/summary'], function () {
 
 Route::group(['prefix' => 'document'], function () {
     Route::get('/list','DocumentController@listDocument')->name('document.list');
-    Route::get('/create','DocumentController@createDocument')->name('document.create');
     Route::post('/store','DocumentController@storeDocument')->name('document.store');
     Route::get('/delete','DocumentController@deleteDocument')->name('document.delete');
     Route::get('downLoadFile/{id}','DocumentController@documentDownloadFile')->name('document.downLoadFile');
+    Route::post('/list/order','DocumentController@listDocumentByOrder')->name('document.list.order');
 });
 
 //Roles

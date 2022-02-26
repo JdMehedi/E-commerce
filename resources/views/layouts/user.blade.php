@@ -186,35 +186,16 @@
                             </a>
                         </li>
                         @endif
-                        <?php
-                        $members = array('document/list', 'document/create');
-                        ?>
-                        @if (!is_null(Auth::user()) &&  (Auth::user()->can('document.list') || Auth::user()->can('document.create')))
-                            <li class="nav-item {{ in_array(Request::path(), $members) ? 'active' : '' }}">
-                            <a  href="javascript:;" class="nav-link nav-toggle">
-                                <i  class="fa fa-file"></i>
-                                <span  class="title">Document</span>
-                                <span  class="arrow {{ in_array(Request::path(), $members) ? 'open' : '' }}"></span>
-                            </a>
-                            <ul  class="sub-menu">
-                                @if($user->can('document.create'))
-                                    <li  class="nav-item {{ Request::path() == 'document/create' ? 'active' : '' }}">
-                                        <a   href="{{ URL::to('document/create') }}" class="nav-link ">
-                                            <span  class="title">Add Document</span>
-                                        </a>
-                                    </li>
-                                @endif
-                                @if($user->can('document.list'))
-                                    <li class="nav-item {{ Request::path() == 'document/list' ? 'active' : '' }}">
-                                        <a  href="{{ URL::to('document/list') }}" class="nav-link ">
-                                            <span class="title">Document List</span>
-                                        </a>
-                                    </li>
-                                @endif
-                            </ul>
-                        </li>
-                        @endif
 
+                        @if (!is_null(Auth::user()) &&  (Auth::user()->can('document.list')))
+                            <li  class="nav-item {{ Request::path() == 'document/list' ? 'active' : '' }}">
+                                <a href="{{ URL::to('document/list') }}" class="nav-link">
+                                    <i  class="fa fa-file"></i>
+                                    <span class="title">Document List</span>
+                                    <span  class="selected"></span>
+                                </a>
+                            </li>
+                        @endif
 
                         @if (!is_null(Auth::user()) &&  (Auth::user()->can('invoice.list')))
                             <li  class="nav-item {{ Request::path() == 'invoice/list' ? 'active' : '' }}">
