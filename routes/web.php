@@ -132,4 +132,5 @@ Route::get('shipper_contact_info_order_form','OrdersController@shipper_contact_i
 Route::get('consignee_contact_info_order_form','OrdersController@consignee_contact_info_order_form')->name('consignee_contact_info_order_form');
 Route::get('party_info_order_form','OrdersController@party_info_order_form')->name('party_info_order_form');
 Route::get('party_contact_info_order_form','OrdersController@party_contact_info_order_form')->name('party_contact_info_order_form');
+Route::get('sameAsConsignee','OrdersController@sameAsConsignee')->name('sameAsConsignee');
 
