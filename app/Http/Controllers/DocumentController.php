@@ -32,6 +32,7 @@ class DocumentController extends Controller
         $data['orders'] = Order::get();
         $data['document_types'] = DocumentType::where('status', 1)->get();
         $data['documents']= Document::whereNull('deleted_at')->with('order_info','document_type_info')->get();
+        $data['documents'] = null;
         return view('document.list',$data);
     }
 

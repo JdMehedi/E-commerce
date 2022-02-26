@@ -28,6 +28,24 @@ Route::group(['prefix' => 'shipment/summary'], function () {
     Route::get('/list','ShipmentSummaryController@listShipmentSummary')->name('shipment.summary.list');
 });
 
+//freight
+
+Route::group(['prefix' => 'freight'], function () {
+    Route::get('/list','FreightController@listFreight')->name('freight.list');
+});
+
+//customs
+
+Route::group(['prefix' => 'customs'], function () {
+    Route::get('/list','CustomsController@listCustoms')->name('customs.list');
+});
+
+//delivery
+
+Route::group(['prefix' => 'delivery'], function () {
+    Route::get('/list','DeliveryController@listDelivery')->name('delivery.list');
+});
+
 //Documents
 
 Route::group(['prefix' => 'document'], function () {

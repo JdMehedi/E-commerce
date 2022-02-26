@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class InvoiceController extends Controller
+class CustomsController extends Controller
 {
+
     public $user;
     public function __construct()
     {
@@ -16,11 +17,11 @@ class InvoiceController extends Controller
         });
     }
 
-    public function listInvoice(){
-        if (is_null($this->user) ||  !$this->user->can('invoice.list')) {
+    public function listCustoms(){
+        if (is_null($this->user) ||  !$this->user->can('customs.list')) {
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
-        return view('invoice.invoiceList');
+        return view('customs.list');
     }
 }
