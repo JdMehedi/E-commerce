@@ -96,7 +96,7 @@ class RolePermissionSeeder extends Seeder
                 'group_name'=> 'Document',
                 'permissions'=>[
                     'document.list',
-                    'document.create',
+                    'document.list.order',
                     'document.store',
                     'document.delete'
                 ]
