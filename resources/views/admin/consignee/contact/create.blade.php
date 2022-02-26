@@ -34,20 +34,6 @@
                     <div class="form-body">
                         <input type="hidden"  name="user_id"  value="{{$lists->id}}" class="form-control input-inline input-medium" >
                         <div class="form-group">
-                            <label class="col-md-5 control-label"> Email <span class="red">*</span> : </label>
-                            <div class="col-md-7">
-                                <input type="text"  name="email"  value=""   placeholder="Enter email" class="form-control input-inline input-medium" >
-                                <div class="red">{{ $errors->first('contact') }}</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-5 control-label">Phone <span class="red">*</span> : </label>
-                            <div class="col-md-7">
-                                <input type="tel"  name="phone"  value=""   placeholder="Enter phone number" class="form-control input-inline input-medium" >
-                                <div class="red">{{ $errors->first('phone') }}</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label class="col-md-5 control-label">Contact <span class="red">*</span> : </label>
                             <div class="col-md-7">
                                 <input type="text"  name="contact"  value=""   placeholder="Enter contact" class="form-control input-inline input-medium" >
@@ -62,6 +48,13 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-md-5 control-label">Phone <span class="red">*</span> : </label>
+                            <div class="col-md-7">
+                                <input type="tel"  name="phone"  value=""   placeholder="Enter phone number" class="form-control input-inline input-medium" >
+                                <div class="red">{{ $errors->first('phone') }}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-md-5 control-label">Fax <span class="red">*</span> : </label>
                             <div class="col-md-7">
                                 <input type="text"  name="fax"  value=""   placeholder="Enter fax number" class="form-control input-inline input-medium" >
@@ -69,9 +62,16 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-md-5 control-label"> Email <span class="red">*</span> : </label>
+                            <div class="col-md-7">
+                                <input type="text"  name="email"  value=""   placeholder="Enter email" class="form-control input-inline input-medium" >
+                                <div class="red">{{ $errors->first('email') }}</div>
+                            </div>
+                        </div>                      
+                        <div class="form-group">
                             <label class="col-md-5 control-label">Address <span class="red">*</span> : </label>
                             <div class="col-md-7">
-                                <textarea name="address" id="address" cols="30" rows="10"></textarea>
+                                <textarea name="address" id="address" cols="27" rows="5"></textarea>
                                 <div class="red">{{ $errors->first('address') }}</div>
                             </div>
                         </div>

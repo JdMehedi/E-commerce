@@ -6,7 +6,29 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" type="text/css" />
 @stop
 
+
 @section('content')
+<style>
+    .MinusMargin{
+        margin-bottom:-15px;
+    }
+    .pad-24{
+        padding-left: 25px;
+    }
+    .customeheight{
+        height: 24px !important;
+    }
+    .select2-selection--single{
+        height: 24px !important;
+        padding: 2px 8px !important;
+    }
+    .paddingtopZero{
+        padding-top: 0px !important;
+    }
+    .cheight{
+        height: -34px
+    }
+</style>
 
     <!-- BEGIN PAGE BAR -->
     <div class="page-bar">
@@ -28,7 +50,7 @@
                             <div class="d-flex flex-wrap">
                                 <label class="col-md-2 control-label" for="">Shipper:</label>
                                 <div class="col-md-7">
-                                    <select name="shipper"  id="shipper" class="col-md-12 mb-2 selectTag">
+                                    <select  name="shipper"   id="shipper" class="col-md-12 mb-2 selectTag shn">
                                         <option value="">Select a Shipper</option>
                                 @if(!empty($shippers))      
                                     @foreach($shippers as $shipper)
@@ -66,45 +88,55 @@
 
                         <div class="row m-2" style="display:none" id="shipper_cinfo">
                              
-                                  <div class="col-md-2"></div>
-                                <label class="col-md-1 " for=""><b>Phone:</b></label>
+                              <div class="row">
+                              <div class="col-md-2"></div>
+                                <label class="col-md-1 pad-24 inline-block " for=""><b>Phone:</b></label>
                                 <div class="col-md-9">
-                                    <div class="form-group" id="shipper_contact_phone">
+                                    <div class="form-group MinusMargin" id="shipper_contact_phone">
                                         
                                     </div>                           
                           
                                 </div>
-                                <div class="col-md-2"></div>
-                                <label class="col-md-1 pl-2" for=""><b>Mobile:</b></label>
+                              </div>
+                              <div class="row">
+                              <div class="col-md-2"></div>
+                                <label class="col-md-1 pad-24 inline-block pl-2" for=""><b>Mobile:</b></label>
                                 <div class="col-md-9">
-                                    <div class=" form-group" id="shipper_contact_mobile">
+                                    <div class=" form-group MinusMargin" id="shipper_contact_mobile">
                                    
                                     </div>                           
                               
                                 </div> 
-                                <div class="col-md-2"></div>
-                                <label class="col-md-1 pl-2" for=""><b>Fax:</b></label>
+                              </div>
+                              <div class="row">
+                              <div class="col-md-2"></div>
+                                <label class="col-md-1 pad-24 inline-block pl-2" for=""><b>Fax:</b></label>
                                 <div class="col-md-9">
-                                    <div class=" form-group" id="shipper_contact_fax">
+                                    <div class=" form-group MinusMargin" id="shipper_contact_fax">
                                       
                                     </div>                           
                              
                                  </div> 
-                                 <div class="col-md-2"></div>              
-                                <label class="col-md-1 pl-2" for=""><b>Email:</b></label>
+                              </div>
+                             <div class="row">
+                             <div class="col-md-2"></div>              
+                                <label class="col-md-1 pad-24 inline-block pl-2" for=""><b>Email:</b></label>
                                 <div class="col-md-9">
-                                    <div class="form-group" id="shipper_contact_email">
+                                    <div class="form-group MinusMargin" id="shipper_contact_email">
                                     
                                     </div>                           
                                
                                 </div>  
-                                <div class="col-md-2"></div>
-                                <label class="col-md-1 pr-2" for=""><b>Address:</b></label>
+                             </div>
+                               <div class="row">
+                               <div class="col-md-2"></div>
+                                <label class="col-md-1 pad-24 inline-block pr-2" for=""><b>Address:</b></label>
                                 <div class="col-md-9">
-                                    <div class="form-group" id="shipper_contact_address">
+                                    <div class="form-group MinusMargin" id="shipper_contact_address">
                                    
                                     </div>                           
                                 </div>
+                               </div>
                      
                         </div><br>
                         <!--  -->
@@ -145,45 +177,55 @@
 
                         <div class="row m-2" style="display:none" id="consignee_cinfo">
                              
-                                  <div class="col-md-2"></div>
-                                <label class="col-md-1 " for=""><b>Phone:</b></label>
+                             <div class="row">
+                             <div class="col-md-2"></div>
+                                <label class="col-md-1 pad-24 inline-block " for=""><b>Phone:</b></label>
                                 <div class="col-md-9">
-                                    <div class="form-group" id="consignee_contact_phone">
+                                    <div class="form-group MinusMargin" id="consignee_contact_phone">
                                         
                                     </div>                           
                           
                                 </div>
-                                <div class="col-md-2"></div>
-                                <label class="col-md-1 pl-2" for=""><b>Mobile:</b></label>
+                             </div>
+                             <div class="row">
+                             <div class="col-md-2"></div>
+                                <label class="col-md-1 pad-24 inline-block pl-2" for=""><b>Mobile:</b></label>
                                 <div class="col-md-9">
-                                    <div class=" form-group" id="consignee_contact_mobile">
+                                    <div class=" form-group MinusMargin" id="consignee_contact_mobile">
                                    
                                     </div>                           
                               
                                 </div> 
-                                <div class="col-md-2"></div>
-                                <label class="col-md-1 pl-2" for=""><b>Fax:</b></label>
+                             </div>
+                              <div class="row">
+                              <div class="col-md-2"></div>
+                                <label class="col-md-1 pad-24 inline-block pl-2" for=""><b>Fax:</b></label>
                                 <div class="col-md-9">
-                                    <div class=" form-group" id="consignee_contact_fax">
+                                    <div class=" form-group MinusMargin" id="consignee_contact_fax">
                                       
                                     </div>                           
                              
                                  </div> 
-                                 <div class="col-md-2"></div>              
-                                <label class="col-md-1 pl-2" for=""><b>Email:</b></label>
+                              </div>
+                              <div class="row">
+                              <div class="col-md-2"></div>              
+                                <label class="col-md-1 pad-24 inline-block pl-2" for=""><b>Email:</b></label>
                                 <div class="col-md-9">
-                                    <div class="form-group" id="consignee_contact_email">
+                                    <div class="form-group MinusMargin" id="consignee_contact_email">
                                     
                                     </div>                           
                                
-                                </div>  
-                                <div class="col-md-2"></div>
-                                <label class="col-md-1 pr-2" for=""><b>Address:</b></label>
+                                </div> 
+                              </div> 
+                              <div class="row">
+                              <div class="col-md-2"></div>
+                                <label class="col-md-1 pad-24 inline-block pr-2" for=""><b>Address:</b></label>
                                 <div class="col-md-9">
-                                    <div class="form-group" id="consignee_contact_address">
+                                    <div class="form-group MinusMargin" id="consignee_contact_address">
                                    
                                     </div>                           
                                 </div>
+                              </div>
                      
                         </div><br>
 
@@ -228,187 +270,197 @@
 
                         <div class="row m-2" style="display:none" id="party_cinfo">
                              
-                                  <div class="col-md-2"></div>
-                                <label class="col-md-1 " for=""><b>Phone:</b></label>
+                             <div class="row">
+                             <div class="col-md-2"></div>
+                                <label class="col-md-1 pad-24 inline-block " for=""><b>Phone:</b></label>
                                 <div class="col-md-9">
-                                    <div class="form-group" id="party_contact_phone">
+                                    <div class="form-group MinusMargin" id="party_contact_phone">
                                         
                                     </div>                           
                           
                                 </div>
-                                <div class="col-md-2"></div>
-                                <label class="col-md-1 pl-2" for=""><b>Mobile:</b></label>
+                             </div>
+                              <div class="row">
+                              <div class="col-md-2"></div>
+                                <label class="col-md-1 pad-24 inline-block pl-2" for=""><b>Mobile:</b></label>
                                 <div class="col-md-9">
-                                    <div class=" form-group" id="party_contact_mobile">
+                                    <div class=" form-group MinusMargin" id="party_contact_mobile">
                                    
                                     </div>                           
                               
                                 </div> 
-                                <div class="col-md-2"></div>
-                                <label class="col-md-1 pl-2" for=""><b>Fax:</b></label>
+                              </div>
+                             <div class="row">
+                             <div class="col-md-2"></div>
+                                <label class="col-md-1 pad-24 inline-block pl-2" for=""><b>Fax:</b></label>
                                 <div class="col-md-9">
-                                    <div class=" form-group" id="party_contact_fax">
+                                    <div class=" form-group MinusMargin" id="party_contact_fax">
                                       
                                     </div>                           
                              
                                  </div> 
-                                 <div class="col-md-2"></div>              
-                                <label class="col-md-1 pl-2" for=""><b>Email:</b></label>
+                             </div>
+                                <div class="row">
+                                <div class="col-md-2"></div>              
+                                <label class="col-md-1 pad-24 inline-block pl-2" for=""><b>Email:</b></label>
                                 <div class="col-md-9">
-                                    <div class="form-group" id="party_contact_email">
+                                    <div class="form-group MinusMargin" id="party_contact_email">
                                     
                                     </div>                           
                                
-                                </div>  
-                                <div class="col-md-2"></div>
-                                <label class="col-md-1 pr-2" for=""><b>Address:</b></label>
+                                </div> 
+                                </div> 
+                               <div class="row">
+                               <div class="col-md-2"></div>
+                                <label class="col-md-1 pad-24 inline-block pr-2" for=""><b>Address:</b></label>
                                 <div class="col-md-9">
-                                    <div class="form-group" id="party_contact_address">
+                                    <div class="form-group MinusMargin" id="party_contact_address">
                                    
                                     </div>                           
                                 </div>
                      
+                               </div>
                         </div><br>
 
                        <!--  -->      
 
                        <div class="row">
                            <div class="d-flex">
-                               <label class="col-md-2 control-label" for="">PO:</label>
+                               <label class="col-md-2 paddingtopZero control-label" for="">PO:</label>
                                <div class="col-md-4">
-                                   <input type="text" class="form-control w-75" name="PO_No" value="@if(!empty($orders->PO_No)) {{$orders->PO_No}} @endif" placeholder="Enter PO"> <br>
+                                   <input type="text" class="form-control customeheight w-75" name="PO_No" value="@if(!empty($orders->PO_No)) {{$orders->PO_No}} @endif" placeholder="Enter PO"> <br>
                                </div>
                            </div>
-                           <label class="col-md-2 control-label" for="">POl:</label>
+                           <label class="col-md-2 paddingtopZero control-label" for="">POl:</label>
                            <div class="col-md-4">
-                               <input type="text" name="POL" class="form-control mt-5" value="@if(!empty($orders->POL)) {{$orders->POL}} @endif" placeholder="Enter POL">
+                               <input type="text" name="POL" class="form-control customeheight mt-5" value="@if(!empty($orders->POL)) {{$orders->POL}} @endif" placeholder="Enter POL">
                            </div>
                        </div>
                        <!--  -->
                         <div class="row">
                             <div class="d-flex">
-                                <label class="col-md-2 control-label" for="">POD:</label>
+                                <label class="col-md-2 paddingtopZero control-label" for="">POD:</label>
                                 <div class="col-md-4">
-                                    <input type="text" name="POD" class="form-control w-75" value="@if(!empty($orders->POD)) {{$orders->POD}} @endif" placeholder="Enter POD"> <br>
+                                    <input type="text" name="POD" class="form-control customeheight w-75" value="@if(!empty($orders->POD)) {{$orders->POD}} @endif" placeholder="Enter POD"> <br>
                                 </div>
                             </div>
-                            <label class="col-md-2 control-label" for="">Ramp/Vai:</label>
+                            <label class="col-md-2 paddingtopZero control-label" for="">Ramp/Vai:</label>
                             <div class="col-md-4">
 
-                                <input type="text" name="ramp_via" class="form-control mt-5" value="@if(!empty($orders->ramp_via)) {{$orders->ramp_via}} @endif" placeholder="Enter Ramp">
+                                <input type="text" name="ramp_via" class="form-control customeheight mt-5" value="@if(!empty($orders->ramp_via)) {{$orders->ramp_via}} @endif" placeholder="Enter Ramp">
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
-                                <label class="col-md-2 control-label" for="">Size:</label>
+                                <label class="col-md-2 paddingtopZero control-label" for="">Size:</label>
                                 <div class="col-md-4">
-                                    <input type="text" name="size" class="form-control w-75" value="@if(!empty($orders->size)) {{$orders->size}} @endif" placeholder="Enter Size"> <br>
+                                    <input type="text" name="size" class="form-control customeheight w-75" value="@if(!empty($orders->size)) {{$orders->size}} @endif" placeholder="Enter Size"> <br>
                                 </div>
                             </div>
-                            <label class="col-md-2 control-label" for="">Carrier:</label>
+                            <label class="col-md-2 paddingtopZero control-label" for="">Carrier:</label>
                             <div class="col-md-4">
-                                <input type="text" name="carrier" class="form-control mt-5" value="@if(!empty($orders->carrier)) {{$orders->carrier}} @endif" placeholder="Enter Carrier">
+                                <input type="text" name="carrier" class="form-control customeheight mt-5" value="@if(!empty($orders->carrier)) {{$orders->carrier}} @endif" placeholder="Enter Carrier">
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
-                                <label class="col-md-2 control-label" for="">Vassel/voyage:</label>
+                                <label class="col-md-2 paddingtopZero control-label" for="">Vassel/voyage:</label>
                                 <div class="col-md-4">
-                                    <input type="text" name="vessel_voyage" class="form-control w-75" value="@if(!empty($orders->vessel_voyage)) {{$orders->vessel_voyage}} @endif" placeholder="Enter voyage"> <br>
+                                    <input type="text" name="vessel_voyage" class="form-control customeheight w-75" value="@if(!empty($orders->vessel_voyage)) {{$orders->vessel_voyage}} @endif" placeholder="Enter voyage"> <br>
                                 </div>
                             </div>
-                            <label class="col-md-2 control-label" for="">Container:</label>
-                            <div class="col-md-4">
-
-                                <input type="text" name="container" class="form-control mt-5" value="@if(!empty($orders->container)) {{$orders->container}} @endif" placeholder="Enter Container">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="d-flex">
-                                <label class="col-md-2 control-label" for="">Seal:</label>
-                                <div class="col-md-4">
-                                    <input type="text" name="seal" class="form-control w-75" value="@if(!empty($orders->seal)) {{$orders->seal}} @endif" placeholder="Enter Seal"> <br>
-                                </div>
-                            </div>
-                            <label class="col-md-2 control-label" for="">Weight:</label>
-                            <div class="col-md-4">
-                                <input type="text" name="cargo_weight" class="form-control mt-5" value="@if(!empty($orders->cargo_weight)) {{$orders->cargo_weight}} @endif" placeholder="Enter Weight">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="d-flex">
-                                <label class="col-md-2 control-label" for="">Quantity:</label>
-                                <div class="col-md-4">
-                                    <input type="text" name="quantity" class="form-control w-75" value="@if(!empty($orders->quantity)) {{$orders->quantity}} @endif" placeholder="Enter Quantity"> <br>
-                                </div>
-                            </div>
-                            <label class="col-md-2 control-label" for="">MBL:</label>
+                            <label class="col-md-2 paddingtopZero control-label" for="">Container:</label>
                             <div class="col-md-4">
 
-                                <input type="text" name="MBL" class="form-control mt-5" value="@if(!empty($orders->MBL)) {{$orders->MBL}} @endif" placeholder="Enter MBL">
+                                <input type="text" name="container" class="form-control customeheight mt-5" value="@if(!empty($orders->container)) {{$orders->container}} @endif" placeholder="Enter Container">
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
-                                <label class="col-md-2 control-label" for="">HBL:</label>
+                                <label class="col-md-2 paddingtopZero control-label" for="">Seal:</label>
                                 <div class="col-md-4">
-                                    <input type="text" name="HBL" class="form-control w-75" value="@if(!empty($orders->HBL)) {{$orders->HBL}} @endif" placeholder="Enter HBL"> <br>
+                                    <input type="text" name="seal" class="form-control customeheight w-75" value="@if(!empty($orders->seal)) {{$orders->seal}} @endif" placeholder="Enter Seal"> <br>
                                 </div>
                             </div>
-                            <label class="col-md-2 control-label" for="">Commodity:</label>
+                            <label class="col-md-2 paddingtopZero control-label" for="">Weight:</label>
+                            <div class="col-md-4">
+                                <input type="text" name="cargo_weight" class="form-control customeheight mt-5" value="@if(!empty($orders->cargo_weight)) {{$orders->cargo_weight}} @endif" placeholder="Enter Weight">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="d-flex">
+                                <label class="col-md-2 paddingtopZero control-label" for="">Quantity:</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="quantity" class="form-control customeheight w-75" value="@if(!empty($orders->quantity)) {{$orders->quantity}} @endif" placeholder="Enter Quantity"> <br>
+                                </div>
+                            </div>
+                            <label class="col-md-2 paddingtopZero control-label" for="">MBL:</label>
                             <div class="col-md-4">
 
-                                <input type="text" name="Commodity" class="form-control mt-5" value="@if(!empty($orders->Commodity)) {{$orders->Commodity}} @endif" placeholder="Enter Commodity">
+                                <input type="text" name="MBL" class="form-control customeheight mt-5" value="@if(!empty($orders->MBL)) {{$orders->MBL}} @endif" placeholder="Enter MBL">
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
-                                <label class="col-md-2 control-label" for="">Cut off Date:</label>
+                                <label class="col-md-2 paddingtopZero control-label" for="">HBL:</label>
                                 <div class="col-md-4">
-                                    <input type="date" name="cut_of_date" class="form-control w-75" value="{{old('cut_of_date', date('Y-m-d'))}}" placeholder="Enter Date"> <br>
+                                    <input type="text" name="HBL" class="form-control customeheight w-75" value="@if(!empty($orders->HBL)) {{$orders->HBL}} @endif" placeholder="Enter HBL"> <br>
                                 </div>
                             </div>
-                            <label class="col-md-2 control-label" for="">On Board Date:</label>
+                            <label class="col-md-2 paddingtopZero control-label" for="">Commodity:</label>
                             <div class="col-md-4">
 
-                                <input type="date" name="on_board_date" class="form-control mt-5" value="{{old('on_board_date', date('Y-m-d'))}}" placeholder="Enter Date">
+                                <input type="text" name="Commodity" class="form-control customeheight mt-5" value="@if(!empty($orders->Commodity)) {{$orders->Commodity}} @endif" placeholder="Enter Commodity">
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
-                                <label class="col-md-2 control-label" for="">Eta Port Date:</label>
+                                <label class="col-md-2 paddingtopZero control-label" for="">Cut off Date:</label>
                                 <div class="col-md-4">
-                                    <input type="date" name="eta_port_date"  class="form-control w-75"  value="{{old('eta_port_date', date('Y-m-d'))}}" placeholder="Enter Date"> <br>
+                                    <input type="date" name="cut_of_date" class="form-control customeheight w-75" value="{{old('cut_of_date', date('Y-m-d'))}}" placeholder="Enter Date"> <br>
                                 </div>
                             </div>
-                            <label class="col-md-2 control-label" for="">Eta Ramp Date:</label>
-                            <div class="col-md-4">
-                                <input type="date"name="eta_ramp_date" class="form-control mt-5"  value="{{old('eta_ramp_date', date('Y-m-d'))}}"  placeholder="Enter Date">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="d-flex">
-                                <label class="col-md-2 control-label" for="">Freight Quota:</label>
-                                <div class="col-md-4">
-                                    <input type="text" name="freight_quote" class="form-control w-75" value="@if(!empty($orders->freight_quote)) {{$orders->freight_quote}} @endif"  placeholder="Enter Freight Quota"> <br>
-                                </div>
-                            </div>
-                            <label class="col-md-2 control-label" for="">Exw Local:</label>
+                            <label class="col-md-2 paddingtopZero control-label" for="">On Board Date:</label>
                             <div class="col-md-4">
 
-                                <input type="text" name="exw_local" class="form-control mt-5" value="@if(!empty($orders->exw_local)) {{$orders->exw_local}} @endif" placeholder="Enter Exw Local">
+                                <input type="date" name="on_board_date" class="form-control customeheight mt-5" value="{{old('on_board_date', date('Y-m-d'))}}" placeholder="Enter Date">
                             </div>
                         </div>
                         <div class="row">
                             <div class="d-flex">
-                                <label class="col-md-2 control-label" for="">Wharfage:</label>
+                                <label class="col-md-2 paddingtopZero control-label" for="">Eta Port Date:</label>
                                 <div class="col-md-4">
-                                    <input type="text" name="wharfage" class="form-control w-75" value="@if(!empty($orders->wharfage)) {{$orders->wharfage}} @endif" placeholder="Enter Wharfage"> <br>
+                                    <input type="date" name="eta_port_date"  class="form-control customeheight w-75"  value="{{old('eta_port_date', date('Y-m-d'))}}" placeholder="Enter Date"> <br>
+                                </div>
+                            </div>
+                            <label class="col-md-2 paddingtopZero control-label" for="">Eta Ramp Date:</label>
+                            <div class="col-md-4">
+                                <input type="date"name="eta_ramp_date" class="form-control customeheight mt-5"  value="{{old('eta_ramp_date', date('Y-m-d'))}}"  placeholder="Enter Date">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="d-flex">
+                                <label class="col-md-2 paddingtopZero control-label" for="">Freight Quota:</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="freight_quote" class="form-control customeheight w-75" value="@if(!empty($orders->freight_quote)) {{$orders->freight_quote}} @endif"  placeholder="Enter Freight Quota"> <br>
+                                </div>
+                            </div>
+                            <label class="col-md-2 paddingtopZero control-label" for="">Exw Local:</label>
+                            <div class="col-md-4">
+
+                                <input type="text" name="exw_local" class="form-control customeheight mt-5" value="@if(!empty($orders->exw_local)) {{$orders->exw_local}} @endif" placeholder="Enter Exw Local">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="d-flex">
+                                <label class="col-md-2 paddingtopZero control-label" for="">Wharfage:</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="wharfage" class="form-control customeheight w-75" value="@if(!empty($orders->wharfage)) {{$orders->wharfage}} @endif" placeholder="Enter Wharfage"> <br>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <label class="col-md-2 control-label" for="">Delivery Address:</label>
+                            <label class="col-md-2  control-label" for="">Delivery Address:</label>
                             <div class="col-md-10">
                                 <textarea name="delivery_address" id="" cols="80" rows="2">@if(!empty($orders->delivery_address)) {{$orders->delivery_address}} @endif</textarea>
                             </div>
