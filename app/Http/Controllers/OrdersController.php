@@ -252,6 +252,31 @@ class OrdersController extends Controller
             $party_contact_info_order_form = $pcontacts;
         }
         return response()->json(['party_contact_info_order_form' => $party_contact_info_order_form]);
+    }  
+
+    public function sameAsConsignee(Request $request){
+        $consignee_contact_id = $request->consignee_contact_id;
+        $consignee = $request->consignee;
+        $ccontacts = UserContact::where('user_id',$consignee)->get();
+        $consignee_info_order_form = '<option value="">select consignee contact</option>';
+        if(!empty($ccontacts)){
+            foreach ($ccontacts as $ccontact) {
+
+                $consignee_info_order_form = $consignee_info_order_form . "<option value='" .$ccontact['id']  . "'";
+                if($ccontact['id'] == $consignee_contact_id){
+                    $consignee_info_order_form .= "selected";
+                }
+                $consignee_info_order_form .= ">". $ccontact['contact'] . "</option>";
+            }
+        }
+
+        $ccontacts = UserContact::where('id',$consignee_contact_id)->first();
+        $consignee_contact_info_order_form = '';
+        if(!empty($ccontacts)){
+            $consignee_contact_info_order_form = $ccontacts;
+        }
+
+        return response()->json(['party_info_order_form' => $consignee_info_order_form, 'party_contact_info_order_form' => $consignee_contact_info_order_form]);
     }
 
 

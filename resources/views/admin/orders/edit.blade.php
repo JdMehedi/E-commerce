@@ -85,15 +85,17 @@
                             <div class="col-md-3"></div>                           
                             </div>
                         </div>   
-
-                        <div class="row m-2" style="display:none" id="shipper_cinfo">
+                        <?php 
+                          $shipperContactDetailInfo = App\UserContact::where('id',$orders->shipper_contact_id)->first();
+                        ?>
+                        <div class="row m-2" style="" id="shipper_cinfo">
                              
                               <div class="row">
                               <div class="col-md-2"></div>
                                 <label class="col-md-1 pad-24 inline-block " for=""><b>Phone:</b></label>
                                 <div class="col-md-9">
                                     <div class="form-group MinusMargin" id="shipper_contact_phone">
-                                        
+                                        @if(!empty($shipperContactDetailInfo->phone)) {{$shipperContactDetailInfo->phone}} @endif
                                     </div>                           
                           
                                 </div>
@@ -103,6 +105,7 @@
                                 <label class="col-md-1 pad-24 inline-block pl-2" for=""><b>Mobile:</b></label>
                                 <div class="col-md-9">
                                     <div class=" form-group MinusMargin" id="shipper_contact_mobile">
+                                    @if(!empty($shipperContactDetailInfo->mobile)) {{$shipperContactDetailInfo->mobile}} @endif
                                    
                                     </div>                           
                               
@@ -113,6 +116,7 @@
                                 <label class="col-md-1 pad-24 inline-block pl-2" for=""><b>Fax:</b></label>
                                 <div class="col-md-9">
                                     <div class=" form-group MinusMargin" id="shipper_contact_fax">
+                                    @if(!empty($shipperContactDetailInfo->fax)) {{$shipperContactDetailInfo->fax}} @endif
                                       
                                     </div>                           
                              
@@ -123,6 +127,7 @@
                                 <label class="col-md-1 pad-24 inline-block pl-2" for=""><b>Email:</b></label>
                                 <div class="col-md-9">
                                     <div class="form-group MinusMargin" id="shipper_contact_email">
+                                    @if(!empty($shipperContactDetailInfo->email)) {{$shipperContactDetailInfo->email}} @endif
                                     
                                     </div>                           
                                
@@ -133,6 +138,7 @@
                                 <label class="col-md-1 pad-24 inline-block pr-2" for=""><b>Address:</b></label>
                                 <div class="col-md-9">
                                     <div class="form-group MinusMargin" id="shipper_contact_address">
+                                    @if(!empty($shipperContactDetailInfo->address)) {{$shipperContactDetailInfo->address}} @endif
                                    
                                     </div>                           
                                 </div>
@@ -174,14 +180,17 @@
                             </div>
                             <div class="col-md-3"></div>
                         </div>  
-
-                        <div class="row m-2" style="display:none" id="consignee_cinfo">
+                        <?php 
+                          $consigneeContactDetailInfo = App\UserContact::where('id',$orders->consignee_contact_id)->first();
+                        ?>
+                        <div class="row m-2" style="" id="consignee_cinfo">
                              
                              <div class="row">
                              <div class="col-md-2"></div>
                                 <label class="col-md-1 pad-24 inline-block " for=""><b>Phone:</b></label>
                                 <div class="col-md-9">
                                     <div class="form-group MinusMargin" id="consignee_contact_phone">
+                                    @if(!empty($consigneeContactDetailInfo->phone)) {{$consigneeContactDetailInfo->phone}} @endif
                                         
                                     </div>                           
                           
@@ -192,6 +201,7 @@
                                 <label class="col-md-1 pad-24 inline-block pl-2" for=""><b>Mobile:</b></label>
                                 <div class="col-md-9">
                                     <div class=" form-group MinusMargin" id="consignee_contact_mobile">
+                                    @if(!empty($consigneeContactDetailInfo->mobile)) {{$consigneeContactDetailInfo->mobile}} @endif
                                    
                                     </div>                           
                               
@@ -202,6 +212,7 @@
                                 <label class="col-md-1 pad-24 inline-block pl-2" for=""><b>Fax:</b></label>
                                 <div class="col-md-9">
                                     <div class=" form-group MinusMargin" id="consignee_contact_fax">
+                                    @if(!empty($consigneeContactDetailInfo->fax)) {{$consigneeContactDetailInfo->fax}} @endif
                                       
                                     </div>                           
                              
@@ -212,6 +223,7 @@
                                 <label class="col-md-1 pad-24 inline-block pl-2" for=""><b>Email:</b></label>
                                 <div class="col-md-9">
                                     <div class="form-group MinusMargin" id="consignee_contact_email">
+                                    @if(!empty($consigneeContactDetailInfo->email)) {{$consigneeContactDetailInfo->email}} @endif
                                     
                                     </div>                           
                                
@@ -222,6 +234,7 @@
                                 <label class="col-md-1 pad-24 inline-block pr-2" for=""><b>Address:</b></label>
                                 <div class="col-md-9">
                                     <div class="form-group MinusMargin" id="consignee_contact_address">
+                                    @if(!empty($consigneeContactDetailInfo->address)) {{$consigneeContactDetailInfo->address}} @endif
                                    
                                     </div>                           
                                 </div>
@@ -243,7 +256,7 @@
                                 <div class="col-md-3">
                              <a  href="{{route('consignee.index')}}"><i class="fa-solid fa-circle-plus"></i></a>
                            <span style="padding:6px">
-                           <input  type="checkbox" id="" name="" value="">
+                           <input  type="checkbox" id="sameAsConsignee"  class="pointer" name="sameAsConsignee" value="1">
                              <label for="vehicle1"> Same as Consignee</label><br>
 
                            </span>
@@ -267,15 +280,18 @@
                             </div>
                             <div class="col-md-3"></div>
                         </div>   
-
-                        <div class="row m-2" style="display:none" id="party_cinfo">
+                        <?php 
+                          $partyContactDetailInfo = App\UserContact::where('id',$orders->party_contact_id)->first();
+                        ?>
+                        <div class="row m-2" style="" id="party_cinfo">
                              
                              <div class="row">
                              <div class="col-md-2"></div>
                                 <label class="col-md-1 pad-24 inline-block " for=""><b>Phone:</b></label>
                                 <div class="col-md-9">
                                     <div class="form-group MinusMargin" id="party_contact_phone">
-                                        
+                                    @if(!empty($partyContactDetailInfo->phone)) {{$partyContactDetailInfo->phone}} @endif
+
                                     </div>                           
                           
                                 </div>
@@ -285,6 +301,7 @@
                                 <label class="col-md-1 pad-24 inline-block pl-2" for=""><b>Mobile:</b></label>
                                 <div class="col-md-9">
                                     <div class=" form-group MinusMargin" id="party_contact_mobile">
+                                    @if(!empty($partyContactDetailInfo->mobile)) {{$partyContactDetailInfo->mobile}} @endif
                                    
                                     </div>                           
                               
@@ -295,6 +312,7 @@
                                 <label class="col-md-1 pad-24 inline-block pl-2" for=""><b>Fax:</b></label>
                                 <div class="col-md-9">
                                     <div class=" form-group MinusMargin" id="party_contact_fax">
+                                    @if(!empty($partyContactDetailInfo->fax)) {{$partyContactDetailInfo->fax}} @endif
                                       
                                     </div>                           
                              
@@ -305,6 +323,7 @@
                                 <label class="col-md-1 pad-24 inline-block pl-2" for=""><b>Email:</b></label>
                                 <div class="col-md-9">
                                     <div class="form-group MinusMargin" id="party_contact_email">
+                                    @if(!empty($partyContactDetailInfo->email)) {{$partyContactDetailInfo->email}} @endif
                                     
                                     </div>                           
                                
@@ -315,6 +334,7 @@
                                 <label class="col-md-1 pad-24 inline-block pr-2" for=""><b>Address:</b></label>
                                 <div class="col-md-9">
                                     <div class="form-group MinusMargin" id="party_contact_address">
+                                    @if(!empty($partyContactDetailInfo->address)) {{$partyContactDetailInfo->address}} @endif
                                    
                                     </div>                           
                                 </div>
@@ -513,10 +533,7 @@
                             
                         },
                         error: function(data){
-                            // console.log('error',data);
-                            $('.error_message').html('Error!! Try Again Latter');
-                            $('.error_message').show();
-                            $('.success_message').hide();
+                    
                             
                             return;
                         }
@@ -547,10 +564,7 @@
                             
                         },
                         error: function(data){
-                            // console.log('error',data);
-                            $('.error_message').html('Error!! Try Again Latter');
-                            $('.error_message').show();
-                            $('.success_message').hide();
+                    
                             
                             return;
                         }
@@ -581,9 +595,7 @@
                             
                         },
                         error: function(data){
-                            $('.error_message').html('Error!! Try Again Latter');
-                            $('.error_message').show();
-                            $('.success_message').hide();
+                          
                             
                             return;
                         }
@@ -613,10 +625,7 @@
                             
                         },
                         error: function(data){
-                            // console.log('error',data);
-                            $('.error_message').html('Error!! Try Again Latter');
-                            $('.error_message').show();
-                            $('.success_message').hide();
+                   
                             
                             return;
                         }
@@ -643,9 +652,7 @@
                             
                         },
                         error: function(data){
-                            $('.error_message').html('Error!! Try Again Latter');
-                            $('.error_message').show();
-                            $('.success_message').hide();
+                       
                             
                             return;
                         }
@@ -675,9 +682,7 @@
                             
                         },
                         error: function(data){
-                            $('.error_message').html('Error!! Try Again Latter');
-                            $('.error_message').show();
-                            $('.success_message').hide();
+                         
                             
                             return;
                         }
@@ -688,8 +693,98 @@
 
         });
 
+   $('#sameAsConsignee').on('change', function (event){
+
+        var SAconsignee =$("input[name='sameAsConsignee']:checked").val();
+            if (SAconsignee == 1){
+           var consignee = $('#consignee').val();
+           var consignee_contact_id = $('#consignee_contact_id').val();
+           console.log(consignee);
+           console.log(consignee_contact_id);
+                $.ajax({
+                        type: 'get',                    
+                        url: "{{\Illuminate\Support\Facades\URL::to('sameAsConsignee')}}",
+                        dataType: 'json',
+                        data: {consignee:consignee, consignee_contact_id:consignee_contact_id},
+
+                        success: function (data){
+                           $('#party').val(consignee);
+                           $('#party_contact_id').html(data.party_info_order_form);
+                           $('#party_contact_phone').html(data.party_contact_info_order_form['phone']);
+                           $('#party_contact_mobile').html(data.party_contact_info_order_form['mobile']);
+                           $('#party_contact_email').html(data.party_contact_info_order_form['email']);
+                           $('#party_contact_fax').html(data.party_contact_info_order_form['fax']);
+                           $('#party_contact_address').html(data.party_contact_info_order_form['address']);
+
+                           $('#party_cinfo').show();
+                           selectTagging();
+                            
+                        },
+                        error: function(data){
+                          
+                            return;
+                        }
+                    });
+            }
+            else{
+                $('#party').val(0);
+                $('#party_contact_id').val(0);
+                $('#party_cinfo').hide();
+                selectTagging();
+
+
+            }
+                   
+        });
+        $('#sameAsConsignee').on('change', function (event){
+
+var SAconsignee =$("input[name='sameAsConsignee']:checked").val();
+    if (SAconsignee == 1){
+   var consignee = $('#consignee').val();
+   var consignee_contact_id = $('#consignee_contact_id').val();
+   console.log(consignee);
+   console.log(consignee_contact_id);
+        $.ajax({
+                type: 'get',                    
+                url: "{{\Illuminate\Support\Facades\URL::to('sameAsConsignee')}}",
+                dataType: 'json',
+                data: {consignee:consignee, consignee_contact_id:consignee_contact_id},
+
+                success: function (data){
+                   $('#party').val(consignee);
+                   $('#party_contact_id').html(data.party_info_order_form);
+                   $('#party_contact_phone').html(data.party_contact_info_order_form['phone']);
+                   $('#party_contact_mobile').html(data.party_contact_info_order_form['mobile']);
+                   $('#party_contact_email').html(data.party_contact_info_order_form['email']);
+                   $('#party_contact_fax').html(data.party_contact_info_order_form['fax']);
+                   $('#party_contact_address').html(data.party_contact_info_order_form['address']);
+
+                   $('#party_cinfo').show();
+                   selectTagging();
+                    
+                },
+                error: function(data){
+                  
+                    return;
+                }
+            });
+    }
+    else{
+        $('#party').val(0);
+        $('#party_contact_id').val(0);
+        $('#party_cinfo').hide();
+        selectTagging();
+
+
+    }
+           
+
+
+});
 
         });
+
+
     </script>
 
     <script>
